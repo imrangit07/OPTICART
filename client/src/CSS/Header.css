@@ -1,0 +1,45 @@
+.navbar {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: inline-flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+  color: #1a1a1a;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #f5b47a;
+}
+
+/* .arrow::after {
+  content: "▾";
+  font-size: 10px;
+  margin-left: 5px;
+  vertical-align: middle;
+} */
+
+/* Active/selected item style (optional, can make dynamic) */
+.nav-links > a:first-child .nav-item {
+  color: #f5b47a;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Remove default Link styling */
+.nav-links a {
+  text-decoration: none;
+}
