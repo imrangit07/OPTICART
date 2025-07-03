@@ -1,5 +1,8 @@
 const { catchAsyncErrors } = require("../middleware/catchAsynError");
 const AdminModel = require("../Models/AdminModel");
+const ProductModel = require("../Models/productModel");
+
+
 const jwt = require("jsonwebtoken");
 
 const adminLogin = catchAsyncErrors(async (req, res) => {
@@ -35,13 +38,21 @@ const adminLogin = catchAsyncErrors(async (req, res) => {
 
 });
 
-const userRegister = catchAsyncErrors(async (req, res) => {
-  console.log(req.body);
-  res.send("register");
+const AddNewProducts = (req, res) => {
 
-})
+  console.log(req.body);
+  console.log( req.uploadedFiles);
+  
+  res.status(200).json({
+    success: true,
+    message: 'Files uploaded successfully',
+    data: req.uploadedFiles
+  });
+}
+
+
 
 module.exports = {
   adminLogin,
-  userRegister
+  AddNewProducts
 };

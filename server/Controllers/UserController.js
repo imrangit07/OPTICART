@@ -28,7 +28,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("password not match!", 401))
     }
 
-    res.status(200).send("login successfully");
+    res.status(200).json({ message: "login successfully" });
 
 })
 

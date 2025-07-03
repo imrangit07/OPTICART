@@ -9,6 +9,8 @@ const ErrorHandler = require("./Utils/ErrorHandler")
 const {generatedErrors} = require("./middleware/Errors")
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
+
 const cors = require("cors");
 
 const port =process.env.PORT;
@@ -27,6 +29,8 @@ app.use(
 
 app.use("/admin",adminRoutes);
 app.use("/user",userRoutes);
+
+
 
 app.all("*",(req,res,next)=>{
   next(new ErrorHandler(`URL ${req.url} Not Found!`, 404))
