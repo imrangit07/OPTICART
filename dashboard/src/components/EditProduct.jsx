@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/editProduct.css';
 
-function EditProduct({ product, updateProduct, setActiveView }) {
+function EditProduct({ product, setActiveView }) {
   const [editedProduct, setEditedProduct] = useState({ ...product });
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function EditProduct({ product, updateProduct, setActiveView }) {
           <input 
             type="text" 
             name="category" 
-            value={editedProduct.category} 
+            value={editedProduct.categories} 
             onChange={handleChange} 
             required 
           />
@@ -63,7 +63,7 @@ function EditProduct({ product, updateProduct, setActiveView }) {
           <input 
             type="number" 
             name="stock" 
-            value={editedProduct.stock} 
+            value={editedProduct.stock_quantity} 
             onChange={handleChange} 
             required 
           />

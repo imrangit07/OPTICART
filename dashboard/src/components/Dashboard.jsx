@@ -13,6 +13,7 @@ function Dashboard({ products, addProduct, deleteProduct, updateProduct }) {
     setEditingProduct(product);
     setActiveView('edit');
   };
+  
 
   return (
     <div className="dashboard-container">
@@ -20,8 +21,8 @@ function Dashboard({ products, addProduct, deleteProduct, updateProduct }) {
       <div className="main-content">
         {activeView === 'products' && (
           <ProductList 
-            products={products} 
-            deleteProduct={deleteProduct} 
+            // products={products} 
+            // deleteProduct={deleteProduct} 
             handleEdit={handleEdit} 
           />
         )}
@@ -29,7 +30,7 @@ function Dashboard({ products, addProduct, deleteProduct, updateProduct }) {
         {activeView === 'edit' && (
           <EditProduct 
             product={editingProduct} 
-            updateProduct={updateProduct} 
+            // updateProduct={updateProduct} 
             setActiveView={setActiveView} 
           />
         )}

@@ -17,7 +17,7 @@ const AdminLogin = () => {
       const res = await axios.post(
         'http://localhost:3000/admin/login',
         { adminId, adminPassword },
-        { withCredentials: true }
+        // { withCredentials: true }
       );
 
       alert(res.data.message);
