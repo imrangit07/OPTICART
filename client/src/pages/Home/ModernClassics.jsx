@@ -1,13 +1,14 @@
 import React from 'react';
 import '../../CSS/ModernClassics.css';
-import leftGlasses from '../../../public/right-glass.webp';
-// import rightModels from '../../../public/left-glass.webp';
+import rightGlasses from '../../../public/right-glass.webp';
+import rightModels from '../../../public/left-glass.webp';
 
 const ModernClassics = () => {
   return (
     <section className="modern-classics">
-      <div className="modern-left">
+      <div className="modern-container">
         <div className="text-section">
+          <div className='gardon-glasses'>
           <h2>GORDON-GLASSES</h2>
           <h3>TRUE MODERN CLASSICS.</h3>
           <p>
@@ -16,14 +17,17 @@ const ModernClassics = () => {
           </p>
           <div className="buttons">
             <button className="shop-btn">Shop Now</button>
-            <button className="view-btn">View More</button>
+            <button className="shop-btn modern-view-btn">View More</button>
+          </div>
           </div>
         </div>
-        <img src={leftGlasses} alt="Glasses" className="bottom-glasses" />
+        <div className='right-position'>
+        <img src={rightGlasses} alt="Glasses" className="bottom-glasses" />
+        </div>
         <div className="dotted-bg"></div>
-      </div>
-      <div className="modern-right">
-        {/* <img src={rightModels} alt="Models with Glasses" /> */}
+      {/* <div className="modern-right">
+        <img src={rightModels} alt="Models with Glasses" />
+      </div> */}
       </div>
     </section>
   );

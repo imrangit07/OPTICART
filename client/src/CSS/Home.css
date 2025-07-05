@@ -1,3 +1,7 @@
+body{
+  overflow-x: hidden;
+}
+
 .hero-section {
   display: flex;
   gap: 20px;
@@ -25,20 +29,21 @@
 }
 
 .tagline {
-  font-size: 14px;
+  font-size: 20px;
   letter-spacing: 2px;
   color: #333;
 }
 
 .hero-text h1 {
-  font-size: 40px;
+  /* background-color: red; */
+  font-size:60px;
   margin: 10px 0;
   line-height: 1.2;
 }
 
 .offer {
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: 19px;
+  margin: 20px 0;
 }
 
 .offer span {
@@ -47,7 +52,7 @@
 }
 
 .shop-btn {
-  padding: 10px 20px;
+  padding: 15px 20px;
   background-color: #111;
   color: white;
   border: none;
