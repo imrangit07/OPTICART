@@ -7,9 +7,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-exports.uploads = (file, folder) => {
+const uploads = (file, folder) => {
   return cloudinary.uploader.upload(file, {
     resource_type: "auto",
     folder: folder
   });
 };
+
+module.exports ={
+  uploads,
+  cloudinary
+}

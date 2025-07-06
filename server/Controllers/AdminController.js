@@ -1,7 +1,8 @@
 const { catchAsyncErrors } = require("../middleware/catchAsynError");
 const AdminModel = require("../Models/AdminModel");
+const productModel = require("../Models/productModel");
 const ProductModel = require("../Models/productModel");
-
+const { cloudinary } = require("../Utils/cloudinary")
 
 const jwt = require("jsonwebtoken");
 
@@ -38,21 +39,125 @@ const adminLogin = catchAsyncErrors(async (req, res) => {
 
 });
 
-const AddNewProducts = (req, res) => {
+//This is for Add New Product data
+const AddNewProducts = catchAsyncErrors(async (req, res) => {
+   
+  const {
+    name,
+    description,
+    price,
+    sku,
+    stock_quantity,
+    is_active,
+    categories,
+    color,
+    average,
+    count,
+  } = req.body;
 
-  console.log(req.body);
-  console.log( req.uploadedFiles);
-  
+  const images = (req.uploadedFiles || []).map(file => ({
+    url: file.url,
+    public_id: file.public_id,
+    is_primary: false // Or true if you have logic for that
+  }));
+
+
+
+  const ratings = { average: average, count: count };
+
+  const newProduct = new ProductModel({
+    name,
+    description,
+    price: Number(price),
+    sku,
+    stock_quantity: Number(stock_quantity),
+    is_active: is_active === 'true',
+    categories,
+    color,
+    ratings,
+    images
+  });
+
+  await newProduct.save();
+
   res.status(200).json({
     success: true,
-    message: 'Files uploaded successfully',
-    data: req.uploadedFiles
+    message: 'Product saved successfully',
+    product: newProduct
   });
-}
+});
+
+// This is for show all product data
+const getAllProducts = catchAsyncErrors(async (req, res) => {
+
+  const allProducts = await ProductModel.find();
+
+  console.log(allProducts);
+
+  res.status(200).json({
+    success: true,
+    message: 'Product Get successfully',
+    product: allProducts
+  });
+
+});
 
 
+//This is for Delete product data
+const deleteProduct = catchAsyncErrors(async (req, res) => {
+  const { id } = req.query;
+  const product = await productModel.findById(id);
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product not found'
+    });
+  }
+
+  // Loop over images and delete from Cloudinary
+  if (product.images && product.images.length > 0) {
+    for (const image of product.images) {
+      console.log("check : ", image.public_id);
+
+      // Public_id is importent for deleteing images from Cloudinary.store in database
+      if (image.public_id) {
+        await cloudinary.uploader.destroy(image.public_id);
+      }
+    }
+  }
+
+  await product.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: 'Product and its images deleted successfully'
+  });
+});
+
+const editProduct = catchAsyncErrors(async (req, res) => {
+  const { id } = req.query;
+  const productData = await productModel.findOne({ _id: id })
+  console.log(productData);
+
+  if (!productData) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product not found'
+    });
+  }
+  res.status(200).json({
+    success: true,
+    message: 'Product and its images deleted successfully',
+    productData,
+  });
+
+})
 
 module.exports = {
   adminLogin,
-  AddNewProducts
+  AddNewProducts,
+  getAllProducts,
+  deleteProduct,
+  editProduct
 };

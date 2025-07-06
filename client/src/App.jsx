@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import Shop from './pages/Shop';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
+import Cart from './pages/Cart';
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,6 +19,8 @@ const App = () => {
       <Route path='/shop' element={<Shop/>} />
       <Route path='/portfolio' element={<Portfolio/>} />
       <Route path='/contact' element={<Contact/>} />
+
+      <Route path='/cart' element={<Cart/>} />
       </Route>
     </Routes>
     </BrowserRouter>

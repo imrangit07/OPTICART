@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {Zoom, toast } from 'react-toastify';
 
 const cartSlice = createSlice({
     name: "productCart",
@@ -7,24 +8,61 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToProduct: (state, action) => {
-            // check if product in cart or not
+
             const existingProductIndex = state.products.findIndex(
-                product => product._id === action.payload._id
+                product => product.id === action.payload.id
             );
+
             if (existingProductIndex >= 0) {
-                alert("Product is Allready in Cart");
+                toast.info("Already in cart! 🛒", {transition:Zoom, style: { fontSize: '16px', } });
 
             } else {
-                console.log("This is actions: ", action.payload);
-                state.products.push(action.payload);
+                state.products.push({ ...action.payload, quantity: action.payload.quantity });
+                toast.success("Added to Crt! 🛒", {transition:Zoom, style: { fontSize: '16px', } });
+
             }
+        },
 
+        incrementQuiantity: (state, action) => {
+            const { id } = action.payload;
+            const productIndex = state.products.findIndex(
+                product => product.id === id
+            )
+            if (productIndex >= 0) {
+                state.products[productIndex].quantity += 1;
+            }
+        },
 
-        }
+        decrementQuiantity: (state, action) => {
+            const { id } = action.payload;
+            const productIndex = state.products.findIndex(
+                product => product.id === id
+            )
+            if (productIndex >= 0) {
+                if (state.products[productIndex].quantity <= 1) {
+                    toast.info("Quantity is less than 1! 🛒", {transition:Zoom, style: { fontSize: '16px', } })
+                } else {
+                    state.products[productIndex].quantity -= 1;
+                }
+            }
+        },
+
+          removeProduct: (state, action) => {
+            const {id} = action.payload;
+            const initialLength = state.products.length;
+            state.products = state.products.filter(product => product.id !== id);
+            if(state.products.length < initialLength){
+                 toast.success("Product removed from cart! 🗑️", {transition:Zoom,style: { fontSize: '16px' }});
+            }
+          }
+
     },
 });
 
 export const {
-    addToProduct
+    addToProduct,
+    incrementQuiantity,
+    decrementQuiantity,
+    removeProduct
 } = cartSlice.actions;
 export default cartSlice.reducer;

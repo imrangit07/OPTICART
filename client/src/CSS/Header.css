@@ -1,21 +1,22 @@
 
 .navbar {
   background-color: white;
-  padding: 20px;
+  /* width:100vw; */
+  padding: 20px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  text-align: center;
-  position:sticky;
+  justify-content: space-between;
+  position: sticky;
   top: 0px;
-  right: 0px;
   width: 100%;
   z-index: 999;
+  box-sizing: border-box;
+
 }
 
 .nav-links {
   list-style: none;
-  display: inline-flex;
+  display: flex;
   gap: 40px;
   margin: 0;
   padding: 0;
@@ -31,53 +32,73 @@
 }
 
 .nav-item:hover {
-  color: #f5b47a;
+  color: #ff7e00;
 }
-.icons{
+
+.icons {
   position: relative;
 }
-.cart-count{
+
+.cart-count {
   position: absolute;
-  left: -5px;
-  bottom: -5px;
-  width: 12px;
-  height: 12px;
+  right: -10px;
+  top: -10px;
+  width: 10px;
+  height: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #e6a94e;
-
+  background-color: #ff7e00;
   color: #fff;
   padding: 6px;
 }
-.header-icons{
+
+.header-icons {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
-.head-icon{
+
+.head-icon {
   background-color: #1a1a1a;
-
   color: #fff;
-  padding: 10px;
+  padding: 8px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
-/* .arrow::after {
-  content: "▾";
-  font-size: 10px;
-  margin-left: 5px;
-  vertical-align: middle;
-} */
-
-/* Active/selected item style (optional, can make dynamic) */
-.nav-links > a:first-child .nav-item {
-  color: #f5b47a;
-  font-weight: 500;
-  transition: color 0.3s ease;
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
-/* Remove default Link styling */
 .nav-links a {
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 70px; 
+    right: -100%;
+    width: 60%;
+    height: 100vh;
+    background-color: #fff;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 40px;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 998;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
 }

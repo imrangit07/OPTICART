@@ -7,7 +7,8 @@ const uploadImage = async (req, res, next) => {
   try {
     const uploader = async (path) => await cloudinary.uploads(path, "Glasses-Images");
     const files = req.files;
-
+//  console.log("imageUpload",files);
+ 
     if (!files || !Array.isArray(files)) {
       return next(new ErrorHandler("No files uploaded", 400));
     }

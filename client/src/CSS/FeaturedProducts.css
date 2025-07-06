@@ -71,17 +71,17 @@
 
 .hover-icons svg {
   background-color: transparent;
-  border: 1px solid #e6a94d;
+  border: 1px solid #ff7e00;
   padding: 10px;
   border-radius: 50%;
   font-size: 14px;
-  color: #e6a94d;
+  color: #ff7e00;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .hover-icons svg:hover {
-  background-color: #e6a94d;
+  background-color: #ff7e00;
   color: #fff;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .price {
-  color: #e6a94d;
+  color: #ff7e00;
   font-weight: 600;
 }
 /* Tablet: 3 columns */

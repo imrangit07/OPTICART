@@ -29,11 +29,6 @@ const FeaturedProducts = () => {
   useEffect(() => {
     LoadProducts();
   }, []);
-  console.log("aaya", products);
-
-  products.map((product) => {
-
-  })
 
   return (
     <section className="featured-section">
@@ -43,7 +38,7 @@ const FeaturedProducts = () => {
       </p>
       <div className="product-grid">
         {products.map((product) => (
-          <div className="product-card" key={product.id}>
+          <div className="product-card" key={product._id}>
             <div className="image-wrapper">
               {/* {product.images.map((image)=>{ */}
               <img src={product.images[0].url} alt={product.name} />
@@ -53,7 +48,14 @@ const FeaturedProducts = () => {
                 <FaHeart title="Add to Wishlist" />
                 <LuBaggageClaim
                   title="Add to Cart"
-                  onClick={() => { dispatch(addToProduct({...product,quantity: 1})) }}
+                  onClick={() => { dispatch(addToProduct({
+                    id:product._id,
+                    name:product.name,
+                    price:product.price,
+                    decription:product.decription,
+                    stock:product.stock_quantity,
+                    images:product.images,
+                    quantity: 1})) }}
                 />
               </div>
             </div>
@@ -65,7 +67,7 @@ const FeaturedProducts = () => {
                 {/* <span style={{ backgroundColor: product.color }}></span> */}
                 {/* ))} */}
               </div>
-              <p className="price">${product.price.toFixed(2)}</p>
+              <p className="price">₹{product.price.toFixed(2)}</p>
             </div>
           </div>
         ))}

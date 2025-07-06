@@ -2,6 +2,7 @@ const { catchAsyncErrors } = require("../middleware/catchAsynError");
 const UserModel = require("../Models/UserModel")
 const jwt = require("jsonwebtoken");
 const ErrorHandler = require("../Utils/ErrorHandler");
+const ProductModel = require("../Models/productModel")
 
 const userRegister = catchAsyncErrors(async (req, res) => {
     console.log(req.body);
@@ -32,7 +33,23 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
 })
 
+// This is for show all product data
+const getAllProducts = catchAsyncErrors(async (req, res) => {
+
+    const allProducts = await ProductModel.find();
+    console.log("hellow");
+
+    console.log(allProducts);
+
+    res.status(200).json({
+        success: true,
+        message: 'Product Get successfully',
+        product: allProducts
+    });
+
+});
 module.exports = {
     userRegister,
-    userLogin
+    userLogin,
+    getAllProducts
 };
