@@ -35,7 +35,6 @@ body{
 }
 
 .hero-text h1 {
-  /* background-color: red; */
   font-size:60px;
   margin: 10px 0;
   line-height: 1.2;
@@ -51,8 +50,8 @@ body{
   font-weight: bold;
 }
 
-.shop-btn {
-  padding: 15px 20px;
+.main-shop-btn {
+  padding: 10px 20px;
   background-color: #111;
   color: white;
   border: none;
@@ -99,3 +98,26 @@ body{
   font-weight: bold;
 }
 
+@media (max-width: 768px) {
+  .hero-section {
+  padding: 10px;
+}
+  .hero-section{
+    flex-direction: column;
+  }
+  .tagline {
+  font-size: 14px;
+  }
+  .hero-text h1 {
+  font-size:25px;
+  }
+  .offer {
+  font-size: 19px;
+  margin: 10px 0;
+}
+.shop-btn {
+ margin-top: 0px; 
+ 
+}
+
+}

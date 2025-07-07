@@ -16,7 +16,7 @@ const Home = () => {
           <p className="tagline">GREAT ACCESSORIES</p>
           <h1>Forest Eyes <br /> Glasses</h1>
           <p className="offer">Sale up to <span>30% off</span></p>
-          <button className="shop-btn">Shop All Glasses</button>
+          <button className="main-shop-btn">Shop All Glasses</button>
         </div>
       </div>
       <div className="hero-right">
