@@ -76,6 +76,13 @@ const Header = () => {
       </ul>
 
       <div className="header-icons">
+          <div className='icons'>
+          <HiUserCircle 
+          className='head-icon header-heart'
+          onClick={() => setIsLoginOpen(true)}
+          />
+        </div> 
+        
         <div className='icons'>
           <FaHeart className='head-icon header-heart' />
         </div>
@@ -85,12 +92,7 @@ const Header = () => {
             <LuBaggageClaim className='head-icon header-cart' />
           </div>
         </NavLink>
-        <div className='icons'>
-          <HiUserCircle 
-          className='head-icon header-heart'
-          onClick={() => setIsLoginOpen(true)}
-          />
-        </div>
+      
         <div className="hamburger" onClick={toggleMobileMenu}>
           {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
         </div>

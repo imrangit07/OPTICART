@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs"); 
+const jwt=require("jsonwebtoken")
+
 
 const validateEmail = function (email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
@@ -60,9 +62,15 @@ UserSchema.pre("save", async function (next) {
     }
 });
 
+
 // Method to compare passwords
 UserSchema.methods.comparePassword = async function (userpassword) {
     return await bcrypt.compare(userpassword, this.userPassword);
+};
+
+// Method to generate JWT token
+UserSchema.methods.getjwttoken = async function(){
+    return jwt.sign({id:this._id},process.env.JWT_SECRET, { expiresIn:process.env.JWT_EXPIRE});
 };
 
 module.exports = mongoose.model("User", UserSchema);

@@ -13,4 +13,4 @@ const verifyAdmin = (req, res, next) => {
   });
 };
 
-module.exports = verifyAdmin;
+// module.exports = verifyAdmin;
