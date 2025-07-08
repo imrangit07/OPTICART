@@ -23,21 +23,21 @@ const UserSchema = new mongoose.Schema({
             message: 'Please enter a valid email address'
         }
     },
-    userPincode: {
-        type: Number,
-        required: [true, "Pincode is required"],
-        validate: {
-            validator: function (v) {
-                return /^\d{6}$/.test(v.toString()); 
-            },
-            message: 'Pincode must be 6 digits'
-        }
-    },
-    userAddress: {
-        type: String,
-        required: [true, "Address is required"],
-        trim: true
-    },
+    // userPincode: {
+    //     type: Number,
+    //     required: [true, "Pincode is required"],
+    //     validate: {
+    //         validator: function (v) {
+    //             return /^\d{6}$/.test(v.toString()); 
+    //         },
+    //         message: 'Pincode must be 6 digits'
+    //     }
+    // },
+    // userAddress: {
+    //     type: String,
+    //     required: [true, "Address is required"],
+    //     trim: true
+    // },
     userPassword: {
         type: String,
         required: [true, "Password is required"],

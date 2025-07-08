@@ -23,17 +23,17 @@ const Home = () => {
         <div className="box">
           <img src={womanImg} alt="Woman Sunglasses" />
           <div className="box-text">
-            <p>WOMAN SUNGLASSES</p>
+            <p className='box-para'>WOMAN SUNGLASSES</p>
             <h2>GARAMOND</h2>
-            <a href="#">SHOP NOW</a>
+            <span >SHOP NOW</span>
           </div>
         </div>
         <div className="box">
           <img src={glassesImg} alt="How to Order Eyeglasses" />
           <div className="box-text">
-            <p>FLAT 30% OFF</p>
+            <p className='box-para'>FLAT 30% OFF</p>
             <h2>HOW TO ORDER <br /> EYEGLASSES</h2>
-            <a href="#">SHOP NOW</a>
+            <span >SHOP NOW</span>
           </div>
         </div>
       </div>

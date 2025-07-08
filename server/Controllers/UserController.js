@@ -6,7 +6,8 @@ const ProductModel = require("../Models/productModel")
 
 const userRegister = catchAsyncErrors(async (req, res) => {
     console.log(req.body);
-    const userData = new UserModel(req.body).save();
+    const userData = new UserModel(req.body);
+    await userData.save();
 
     res.status(201).send("register successfully");
 

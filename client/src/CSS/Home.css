@@ -92,32 +92,44 @@ body{
   margin: 10px 0;
 }
 
-.box-text a {
+.box-text span {
   text-decoration: none;
   color: #000;
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
+ @media (max-width: 768px) {
   .hero-section {
-  padding: 10px;
-}
-  .hero-section{
+    padding: 10px;
+  }
+
+  .hero-section {
     flex-direction: column;
   }
+
   .tagline {
-  font-size: 14px;
+    font-size: 14px;
   }
+
   .hero-text h1 {
-  font-size:25px;
+    font-size: 25px;
   }
+
   .offer {
-  font-size: 19px;
-  margin: 10px 0;
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom:10px;
+  }
+
+  .main-shop-btn {
+  padding: 8px 20px;
 }
-.shop-btn {
- margin-top: 0px; 
- 
+  .hero-right{
+    flex-direction: row;
+    gap: 5px;
+  }
+  .box-text h2 {
+  font-size: 16px;
 }
 
-}
+} 
