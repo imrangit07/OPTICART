@@ -12,7 +12,45 @@
   box-sizing: border-box;
 
 }
+/* .main-logo{
+  background-color: red;
+} */
+.main-logo .logo-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 25px;
+  letter-spacing: 2px;
+  color: #ff7e00;
+  font-weight: bold;
+}
 
+.logo-text .logo-img{
+  animation: rotate 5s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  0%,70%{
+    transform: rotate(0deg);
+  }100%{
+    transform: rotate(360deg);
+  }
+}
+.user-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+.user-icons .user-name{
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  /* color: #ff7e00; */
+}
 .nav-links {
   list-style: none;
   display: flex;
@@ -52,10 +90,10 @@
 
 .cart-count {
   position: absolute;
-  right: -10px;
-  top: -10px;
-  width: 10px;
-  height: 10px;
+  left: 15px;
+  top: -5px;
+  width: 8px;
+  height: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,14 +105,19 @@
 
 .header-icons {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
 }
-
+.all-nav-link{
+  text-decoration: none;
+  color: #1a1a1a;
+}
 .head-icon {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 8px;
+  /* background-color: #1a1a1a; */
+  color: #1a1a1a;
+  /* border: 1px solid #ff7e00; */
+  font-size: 22px;
+  padding: 6px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -118,4 +161,44 @@
   .hamburger {
     display: block;
   }
+}
+
+/* Example dropdown style */
+.dropdown-menu {
+  position: absolute;
+  top: 30px; /* adjust as needed */
+  right: -50%;
+  background: #fff;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f5f5f5;
+}
+.dropdown-li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#drop-icon{
+  font-size: 12px;
+  transition: rotate ease-out .4s;
+}
+.user-icons:hover #drop-icon{
+rotate: 180deg;
 }

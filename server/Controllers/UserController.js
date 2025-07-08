@@ -25,7 +25,7 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
     }
 
     const isMatch = await user.comparePassword(req.body.userPassword);
-    console.log("Check : ", isMatch);
+    // console.log("Check : ", isMatch);
 
     if (!isMatch) {
         return next(new ErrorHandler("password not match!", 401))
@@ -44,6 +44,10 @@ const userLogout = catchAsyncErrors(async (req,res)=>{
 
 const currentUser = catchAsyncErrors(async (req,res)=>{
     const user = await UserModel.findById(req.id).exec();
+    console.log("req.id: ",req.id);
+    
+    console.log("current User : ",user);
+    
     res.json({user});
 })
 
@@ -51,9 +55,9 @@ const currentUser = catchAsyncErrors(async (req,res)=>{
 const getAllProducts = catchAsyncErrors(async (req, res) => {
 
     const allProducts = await ProductModel.find();
-    console.log("hellow");
+    // console.log("hellow");
 
-    console.log(allProducts);
+    // console.log(allProducts);
 
     res.status(200).json({
         success: true,

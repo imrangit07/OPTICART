@@ -3,6 +3,7 @@ import '../../CSS/LoginModal.css';
 import { MdCancel } from "react-icons/md";
 import BackendURL from '../../config/backendURL';
 
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const LoginModal = ({ isOpen, onClose }) => {
@@ -42,15 +43,24 @@ const LoginModal = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleLoginSubmit = async(e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-     try {
-      const res = await axios.post(`${BackendURL}/user/login`, userInput);
-      console.log(res.data);
+    try {
+      const res = await axios.post(`${BackendURL}/user/login`, userInput,{ withCredentials: true });
+      console.log(res.data.id);
+      console.log(res.data.token);
+      
+      localStorage.setItem("currentUser",JSON.stringify({id:res.data.id,userName:res.data.userName,token:res.data.token}))
+
       setIsRegister(false);
+      setUserInput({
+        userEmail: '',
+        userPassword: '',
+      })
+      alert(res.data.success)
 
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error);
 
     }
     onClose();

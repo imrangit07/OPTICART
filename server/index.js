@@ -34,7 +34,10 @@ app.use(session({
 app.use(cookieParser());
 
 app.use(
-  cors()
+  cors({
+  origin: 'http://localhost:5173',   // ✅ EXACT ORIGIN — no '*'
+  credentials: true                  // ✅ Allow cookies
+})
 );
 
 

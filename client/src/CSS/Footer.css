@@ -1,0 +1,130 @@
+.footer {
+  background-color: #111;
+  color: #eee;
+  padding: 60px 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+.main-footer-logo{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 2px;
+}
+
+.footer-logo {
+  width: 80px;
+  margin-bottom: 15px;
+}
+.footer-logo-text{
+    font-size: 35px;
+    letter-spacing: 1px;
+    color: #ff7e00;
+}
+
+.footer-section.about p {
+  line-height: 1.6;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  color: #fff;
+}
+
+.footer-section h4::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  background: #ff7e00;
+  left: 0;
+  bottom: -5px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ff7e00;
+}
+
+.footer-section.contact p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color:#ccc;
+}
+
+.footer-section .social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.footer-section .social-icons a {
+  color: #ccc;
+  font-size: 18px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-section .social-icons a:hover {
+  color: #ff7e00;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid #333;
+  font-size: 13px;
+  color: #999;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    text-align: center;
+  }
+
+  .footer-container {
+    gap: 30px;
+  }
+
+  .footer-section {
+    align-items: center;
+  }
+
+  .footer-section .social-icons {
+    justify-content: center;
+  }
+}

@@ -38,7 +38,7 @@ function ProductList({ handleEdit }) {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Images</th>
             <th>Name</th>
             <th>Price</th>
             <th>Category</th>
@@ -49,7 +49,10 @@ function ProductList({ handleEdit }) {
         <tbody>
           {products.map(product => (
             <tr key={product.id}>
-              <td>{product.sku}</td>
+              <td>
+                <img src={product.images[0].url} alt={product.name} width="100px" />
+              </td>
+              {/* <td>{product.sku}</td> */}
               <td>{product.name}</td>
               <td>₹{product.price}</td>
               <td>{product.categories}</td>
