@@ -35,20 +35,20 @@ const userLogin = catchAsyncErrors(async (req, res, next) => {
 
 })
 
-const userLogout = catchAsyncErrors(async (req,res)=>{
- res.clearCookie("token");
-    res.json({message:"Successfully Logout"});
+const userLogout = catchAsyncErrors(async (req, res) => {
+    res.clearCookie("token");
+    res.json({ message: "Successfully Logout" });
 })
 
 // This is for Current User
 
-const currentUser = catchAsyncErrors(async (req,res)=>{
+const currentUser = catchAsyncErrors(async (req, res) => {
     const user = await UserModel.findById(req.id).exec();
-    console.log("req.id: ",req.id);
-    
-    console.log("current User : ",user);
-    
-    res.json({user});
+    // console.log("req.id: ", req.id);
+
+    // console.log("current User : ", user);
+
+    res.json({ user });
 })
 
 // This is for show all product data
