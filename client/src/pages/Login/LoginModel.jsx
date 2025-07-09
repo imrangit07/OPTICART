@@ -2,9 +2,11 @@ import { useState } from 'react';
 import '../../CSS/LoginModal.css';
 import { MdCancel } from "react-icons/md";
 import BackendURL from '../../config/backendURL';
+import { saveUser } from '../../slice/userSlice';
 
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const LoginModal = ({ isOpen, onClose }) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -19,6 +21,8 @@ const LoginModal = ({ isOpen, onClose }) => {
     userPassword: '',
   });
 
+  const dispatch = useDispatch()
+
   const handleRegisterInput = (e) => {
     const { name, value } = e.target;
     setRegisterData(values => ({ ...values, [name]: value }));
@@ -27,7 +31,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   const handleLoginInput = (e) => {
     const { name, value } = e.target;
     setUserInput(values => ({ ...values, [name]: value }));
-    console.log(userInput);
+    // console.log(userInput);
   }
 
   const handleRegisterSubmit = async (e) => {
@@ -47,17 +51,20 @@ const LoginModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${BackendURL}/user/login`, userInput,{ withCredentials: true });
-      console.log(res.data.id);
-      console.log(res.data.token);
-      
-      localStorage.setItem("currentUser",JSON.stringify({id:res.data.id,userName:res.data.userName,token:res.data.token}))
-
+      console.log(res.data);
+      // console.log(res.data.token);
+      dispatch(saveUser(res.data))
+      // localStorage.setItem("currentUser",JSON.stringify({id:res.data.id,userName:res.data.userName,token:res.data.token}))
+      //  const token = Cookies.get("token");
       setIsRegister(false);
       setUserInput({
         userEmail: '',
         userPassword: '',
       })
-      alert(res.data.success)
+      if(res.data.success)
+      {
+      alert("User Login Successfully!")
+      }
 
     } catch (error) {
       alert(error);

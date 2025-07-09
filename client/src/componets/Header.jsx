@@ -9,7 +9,10 @@ import { BiHeartCircle } from "react-icons/bi";
 import { IoMdExit } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import '../CSS/Header.css';
-import { useSelector } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from '../slice/userSlice';
+
 import { useState, useEffect } from 'react';
 
 import LoginModal from '../pages/Login/LoginModel';
@@ -21,13 +24,46 @@ import axios from 'axios';
 
 const Header = () => {
   const cartProduct = useSelector(state => state.productCart.products);
+  const user = useSelector(state => state.loginUser.user);
+
+  const dispatch = useDispatch();
+
+  // console.log("Header-- : ", user);
+
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [user, setUser] = useState()
 
-  const user = JSON.parse(localStorage.getItem("currentUser"))
+  // const user = JSON.parse(localStorage.getItem("currentUser"))
+  const currentUser = async () => {
+    try {
+      const res = await axios.post(`${BackendURL}/user/current`, {},
+        { withCredentials: true });
+      setUser(res.data.user.userName);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
 
 
+  const userLogout = async () => {
+    try {
+      const res = await axios.post(`${BackendURL}/user/logout`, {},
+        { withCredentials: true });
+
+      dispatch(removeUser());
+      alert(res.data.message);
+      currentUser();
+
+    } catch (error) {
+      alert(error);
+    }
+  }
+  useEffect(() => {
+    currentUser();
+  }, []);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -39,7 +75,7 @@ const Header = () => {
 
       <nav className="navbar">
         <div className='main-logo'>
-          <span className='logo-text'><img src={mainLogo} alt="Logo" width="35px" className='logo-img' />PtiCart</span>
+          <span className='logo-text'><img src={mainLogo} alt="Logo" className='logo-img' />PtiCart</span>
         </div>
 
         <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
@@ -101,6 +137,7 @@ const Header = () => {
               <FaRegUserCircle
                 className='head-icon header-heart'
               />
+              <div className='icons-text'>
               {user ?
                 <>
                   <span className='user-name'>{user.userName}</span>
@@ -109,6 +146,7 @@ const Header = () => {
                 "Login"
               }
               <FaAngleDown id='drop-icon' />
+              </div>
 
               {/* DROPDOWN MENU */}
               {isDropdownOpen && (
@@ -117,7 +155,9 @@ const Header = () => {
                     <li className='dropdown-li' onClick={() => setIsLoginOpen(true)}> <FaRegUserCircle /> <span>Login/Register</span></li>
                     <li className='dropdown-li'><MdDriveFolderUpload /> <span>My Orders</span></li>
                     <li className='dropdown-li'><BiHeartCircle /> <span>Wishlist</span></li>
-                    <li className='dropdown-li'><IoMdExit /><span>Logout</span></li>
+                    <li className='dropdown-li'
+                      onClick={userLogout}
+                    ><IoMdExit /><span>Logout</span></li>
                   </ul>
                 </div>
               )}

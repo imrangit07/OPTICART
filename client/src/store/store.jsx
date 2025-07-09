@@ -1,18 +1,21 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartSlice from "../slice/cartSlice";
+import userSlice from "../slice/userSlice"
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+
 // Combine your slices into a root reducer
 const rootReducer = combineReducers({
   productCart: cartSlice,
+  loginUser:userSlice
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['productCart'],
+  whitelist: ['productCart','loginUser'],
 };
 
 // Create persisted reducer

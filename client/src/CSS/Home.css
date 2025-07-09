@@ -19,14 +19,16 @@ body{
   height: auto;
   border-radius: 10px;
 }
-
 .hero-text {
   position: absolute;
-  top: 20%;
-  left: 8%;
+  top: 50%;              
+  left: 20px;            
+  transform: translateY(-50%); 
   color: #111;
   max-width: 300px;
 }
+
+
 
 .tagline {
   font-size: 20px;
