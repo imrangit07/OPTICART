@@ -3,12 +3,16 @@ import { FaSearch, FaHeart, FaBars, FaTimes } from 'react-icons/fa';
 import { LuBaggageClaim } from "react-icons/lu";
 import { HiUserCircle } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
+import { RiEditBoxLine } from "react-icons/ri";
 import { IoHeartOutline } from "react-icons/io5";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { BiHeartCircle } from "react-icons/bi";
 import { IoMdExit } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import '../CSS/Header.css';
+
+import {Zoom, toast } from 'react-toastify';
+
 
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../slice/userSlice';
@@ -43,7 +47,7 @@ const Header = () => {
         { withCredentials: true });
       setUser(res.data.user.userName);
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error);
     }
   }
 
@@ -54,11 +58,15 @@ const Header = () => {
         { withCredentials: true });
 
       dispatch(removeUser());
-      alert(res.data.message);
+
+       toast.success(res.data.message, {transition:Zoom, style: { fontSize: '16px', } });
+      // alert(res.data.message);
       currentUser();
 
     } catch (error) {
-      alert(error);
+       toast.error(error, {transition:Zoom, style: { fontSize: '16px', } });
+      
+      // alert(error);
     }
   }
   useEffect(() => {
@@ -152,9 +160,9 @@ const Header = () => {
               {isDropdownOpen && (
                 <div className="dropdown-menu">
                   <ul>
-                    <li className='dropdown-li' onClick={() => setIsLoginOpen(true)}> <FaRegUserCircle /> <span>Login/Register</span></li>
+                    <li className='dropdown-li' onClick={() => setIsLoginOpen(true)}> <FaRegUserCircle /> <span>Login</span></li>
+                    <li className='dropdown-li'><RiEditBoxLine /> <span>Profile</span></li>
                     <li className='dropdown-li'><MdDriveFolderUpload /> <span>My Orders</span></li>
-                    <li className='dropdown-li'><BiHeartCircle /> <span>Wishlist</span></li>
                     <li className='dropdown-li'
                       onClick={userLogout}
                     ><IoMdExit /><span>Logout</span></li>

@@ -52,7 +52,7 @@ const FeaturedProducts = () => {
                     id:product._id,
                     name:product.name,
                     price:product.price,
-                    decription:product.decription,
+                    description:product.description,
                     stock:product.stock_quantity,
                     images:product.images,
                     quantity: 1})) }}

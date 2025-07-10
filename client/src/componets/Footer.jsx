@@ -33,7 +33,7 @@ const Footer = () => {
           <h4>Contact Us</h4>
           <p>Email: support@opticart.com</p>
           <p>Phone: +91 221-675-90XX</p>
-          <p>Address: 123 Glasses St, Vision City</p>
+          <p>Address: 123 MP Nagar, Bhopal</p>
         </div>
 
         {/* Social Icons */}

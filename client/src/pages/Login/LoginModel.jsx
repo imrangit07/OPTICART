@@ -4,6 +4,8 @@ import { MdCancel } from "react-icons/md";
 import BackendURL from '../../config/backendURL';
 import { saveUser } from '../../slice/userSlice';
 
+import {Zoom, toast } from 'react-toastify';
+
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -38,11 +40,12 @@ const LoginModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${BackendURL}/user/register`, registerData);
-      console.log(res.data);
+      // console.log(res.data);
       setIsRegister(false);
 
     } catch (error) {
-      alert(error.response.data.message);
+       toast.success(error.response.data.message, {transition:Zoom,style: { fontSize: '16px' }});
+      // alert();
 
     }
   };
@@ -63,11 +66,15 @@ const LoginModal = ({ isOpen, onClose }) => {
       })
       if(res.data.success)
       {
-      alert("User Login Successfully!")
+       toast.success("User Login Successfully!", {transition:Zoom, style: { fontSize: '16px', } });
+
+      // alert()
       }
 
     } catch (error) {
-      alert(error);
+       toast.error("User Login Successfully!", {transition:Zoom, style: { fontSize: '16px', } });
+      
+      // alert(error);
 
     }
     onClose();

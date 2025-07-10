@@ -7,6 +7,7 @@ import Shop from './pages/Shop';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
+import Payment from './pages/payment/Payment';
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ const App = () => {
       <Route path='/contact' element={<Contact/>} />
 
       <Route path='/cart' element={<Cart/>} />
+      <Route path='/payment' element={<Payment/>} />
       </Route>
     </Routes>
     </BrowserRouter>

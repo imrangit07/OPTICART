@@ -3,12 +3,14 @@ const app =express();
 require('./Models/Database').connectDatabase();
 const adminRoutes = require("./Routes/AdminRoute");
 
-const userRoutes = require("./Routes/UserRoute")
+const userRoutes = require("./Routes/UserRoute");
 
-const ErrorHandler = require("./Utils/ErrorHandler")
-const {generatedErrors} = require("./middleware/Errors")
+const orderRoutes = require("./Routes/OrdersRoute");
+
+const ErrorHandler = require("./Utils/ErrorHandler");
+const {generatedErrors} = require("./middleware/Errors");
 const bodyParser = require("body-parser");
-const session = require('express-session')
+const session = require('express-session');
 const cookieParser = require("cookie-parser");
 
 
@@ -35,8 +37,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-  origin: 'http://localhost:5173',   // ✅ EXACT ORIGIN — no '*'
-  credentials: true                  // ✅ Allow cookies
+  origin: 'http://localhost:5173',   
+  credentials: true                  
 })
 );
 
@@ -46,6 +48,9 @@ app.use("/admin",adminRoutes);
 
 //User Routes
 app.use("/user",userRoutes);
+
+//User Order
+app.use("/product",orderRoutes)
 
 
 //Handle syn. error
