@@ -44,11 +44,9 @@ const orderSchema = new Schema({
     paymentMethod: {
         type: String,
         enum: ['Credit Card', 'Debit Card', 'Net Banking', 'UPI', 'Cash on Delivery'],
-        // required: true
     },
     paymentStatus: {
         type: String,
-        enum: ['Pending', 'Completed', 'Failed', 'Refunded'],
         default: 'Pending'
     },
     orderStatus: {

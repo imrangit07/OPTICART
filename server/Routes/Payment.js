@@ -104,12 +104,12 @@ router.post("/orders", async (req, res) => {
 router.post("/verify", async (req, res) => {
     try {
         const {
-            razorpay_orderID,
-            razorpay_paymentID,
+            razorpay_order_id,
+            razorpay_payment_id,
             razorpay_signature
         } = req.body;
 
-        const sign = razorpay_orderID + "|" + razorpay_paymentID;
+        const sign = razorpay_order_id + "|" + razorpay_payment_id;
         const resultSign = crypto
             .createHmac("sha256", process.env.KEY_SECRET)
             .update(sign.toString())
@@ -122,7 +122,7 @@ router.post("/verify", async (req, res) => {
                 { razorpay_order_id: razorpay_order_id },
                 {
                     $set: {
-                        razorpay_payment_id: razorpay_orderID,
+                        razorpay_payment_id: razorpay_order_id,
                         razorpay_signature: razorpay_signature,
                         paymentStatus: 'Paid'
                     }
