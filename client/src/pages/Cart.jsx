@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Zoom, toast } from 'react-toastify';
+
 
 import '../CSS/Cart.css';
 
@@ -13,49 +15,55 @@ import BackendURL from '../config/backendURL';
 import { useEffect } from 'react';
 
 const Cart = () => {
-    const [isUserInfo,setisUserInfo] = useState(false);
-    const [userInfo,setUserInfo] = useState(false);
+    const [isUserInfo, setisUserInfo] = useState(false);
+    const [userInfo, setUserInfo] = useState(false);
     const cartProduct = useSelector(state => state.productCart.products);
-     const currentUser = useSelector((state) => state.loginUser.user);
-       console.log("cart : ",currentUser.id);
-       const customerId = currentUser.id;
+    const currentUser = useSelector((state) => state.loginUser.user);
+    // console.log("cart : ", currentUser.id);
+    const customerId = currentUser?.id;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const totalPrice = (cartProduct.reduce((sum, item) => sum + (item.price * (item.quantity)), 0) * 1.18 + 50).toFixed(2);
 
-    const [isLoginOpen, setIsLoginOpen] = useState(false);
-    
-   const LoadUserInfo = async () => {
-  try {
-    const res = await axios.get(`${BackendURL}/user/currentuserinfo/?customerId=${customerId}`);
-    console.log(res.data);
-
-    const isUserInfoAvailable = res.data.success;
-    const userInfoData = res.data.UserInfo;
-
-    setisUserInfo(isUserInfoAvailable);
-    setUserInfo(userInfoData);
-
-    if (isUserInfoAvailable && userInfoData) {
-      navigate('/payment');
-    } else {
-      setIsLoginOpen(true);
-    }
-
-  } catch (error) {
-    console.log(error);
-    setIsLoginOpen(true);
-  }
-};
+    const [isInfoOpen, setIsInfoOpen] = useState(false);
 
 
-    // useEffect(()=>{
-    // },[])
+
+    const LoadUserInfo = async () => {
+        if (!customerId) {
+            toast.info("Please log in to access the resources", {
+                transition: Zoom,
+                style: { fontSize: '16px' },
+            });
+            return;
+        }
+        try {
+            const res = await axios.get(`${BackendURL}/user/currentuserinfo/?customerId=${customerId}`);
+            console.log(res.data);
+
+            const isUserInfoAvailable = res.data.success;
+            const userInfoData = res.data.UserInfo;
+
+            setisUserInfo(isUserInfoAvailable);
+            setUserInfo(userInfoData);
+
+            if (isUserInfoAvailable && userInfoData) {
+                navigate('/payment');
+            } else {
+                setIsInfoOpen(true);
+            }
+
+        } catch (error) {
+            console.log(error);
+            setIsInfoOpen(true);
+        }
+    };
+
 
     return (
         <>
-        
+
             <div className="cart-wrapper">
                 {cartProduct.length <= 0 ? (
                     <div className="empty-cart">
@@ -143,8 +151,8 @@ const Cart = () => {
                     </div>
                 )}
             </div>
-            
-            <UserInfo isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} price={totalPrice}/>
+
+            <UserInfo isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} price={totalPrice} />
 
         </>
     );

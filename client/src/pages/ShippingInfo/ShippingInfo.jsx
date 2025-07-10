@@ -8,7 +8,7 @@ const ShippingInfo = ({ isOpen, onClose, price }) => {
   const cartProduct = useSelector((state) => state.productCart.products);
 
   console.log(cartProduct);
-  
+
   const [address, setAddress] = useState({
     phoneNumber: '',
     street: '',
@@ -35,7 +35,7 @@ const ShippingInfo = ({ isOpen, onClose, price }) => {
         { withCredentials: true }
       );
       console.log(res.data);
-      
+
     } catch (error) {
       console.log(error);
     }

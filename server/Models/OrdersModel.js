@@ -11,10 +11,10 @@ const orderSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    phoneNumber:{
-        type:Number
+    phoneNumber: {
+        type: Number
     },
-    items:[{
+    items: [{
         productId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
@@ -56,6 +56,9 @@ const orderSchema = new Schema({
         enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
         default: 'Pending'
     },
+    razorpay_order_id: String,   
+    razorpay_payment_id: String, 
+    razorpay_signature: String,
     deliveryDate: Date,
     trackingNumber: String
 }, { timestamps: true });

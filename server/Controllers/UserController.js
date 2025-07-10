@@ -128,10 +128,10 @@ const CurrentUserInfo = catchAsyncErrors(async (req, res) => {
 
 
 // This is for add Shipping Address
-const shippingAddress = catchAsyncErrors(async (req, res) => {
+const placeOrder = catchAsyncErrors(async (req, res) => {
   console.log(req.body);
 
-  const { cartProduct, address, price } = req.body;
+  const { cartProduct, address, price,customerId} = req.body;
 
   if (!cartProduct || !Array.isArray(cartProduct) || cartProduct.length === 0) {
     return res.status(400).json({
@@ -147,7 +147,6 @@ const shippingAddress = catchAsyncErrors(async (req, res) => {
     });
   }
 
-  const customerId = req.cookies.userId;
   if (!customerId) {
     return res.status(401).json({
       success: false,
@@ -204,5 +203,5 @@ module.exports = {
   currentUser,
   userInfo,
   CurrentUserInfo,
-  shippingAddress
+  placeOrder
 };

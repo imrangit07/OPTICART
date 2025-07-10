@@ -13,9 +13,9 @@ Router.post("/login",UserRoutes.userLogin);
 Router.post("/logout",isAuthenticated,UserRoutes.userLogout);
 Router.get('/getAllProduct', UserRoutes.getAllProducts);
 Router.post('/userinfo', UserRoutes.userInfo);
-Router.post('/shippinginfo', UserRoutes.shippingAddress);
 
 Router.get("/currentuserinfo",UserRoutes.CurrentUserInfo)
+Router.post('/placeorder', UserRoutes.placeOrder);
 
 
 module.exports= Router;

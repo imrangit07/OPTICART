@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 const UserInfo = ({ isOpen, onClose, price }) => {
   const cartProduct = useSelector((state) => state.productCart.products);
   const currentUser = useSelector((state) => state.loginUser.user);
-   console.log("UserInfo : ",currentUser.id);
-   const customerId = currentUser.id;
+  //  console.log("UserInfo : ",currentUser.id);
+   const customerId = currentUser?.id;
   // console.log(cartProduct);
   
   const [address, setAddress] = useState({
@@ -30,6 +30,10 @@ const UserInfo = ({ isOpen, onClose, price }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+        if (!customerId) {
+        // setIsLoginOpen(true);
+        return;
+    }
     try {
       const res = await axios.post(
         `${BackendURL}/user/userinfo`,{...address,customerId},

@@ -1,6 +1,5 @@
 const express = require("express");
 const app =express();
-require('./Models/Database').connectDatabase();
 const adminRoutes = require("./Routes/AdminRoute");
 
 const userRoutes = require("./Routes/UserRoute");
@@ -13,25 +12,19 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
 
+const paymentRoute= require("./routes/payment");
 
+require('dotenv').config();
 const cors = require("cors");
+
+
+require('./Models/Database').connectDatabase();
+
 
 const port =process.env.PORT;
 
 
 // app.use(cookieParser());
-
-//bodyparser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-//session and cookie
-app.use(session({
-  resave:true,
-  saveUninitialized:true,
-  secret:process.env.EXPRESS_SESSION_SECRET
-}))
-
 //Cookie
 app.use(cookieParser());
 
@@ -41,6 +34,20 @@ app.use(
   credentials: true                  
 })
 );
+
+//bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/api/payment", paymentRoute);
+
+//session and cookie
+app.use(session({
+  resave:true,
+  saveUninitialized:true,
+  secret:process.env.EXPRESS_SESSION_SECRET
+}))
+
+
 
 
 //Admin Routes
