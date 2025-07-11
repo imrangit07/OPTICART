@@ -54,8 +54,8 @@ const orderSchema = new Schema({
         enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
         default: 'Pending'
     },
-    razorpay_order_id: String,   
-    razorpay_payment_id: String, 
+    razorpay_order_id: String,
+    razorpay_payment_id: String,
     razorpay_signature: String,
     deliveryDate: Date,
     trackingNumber: String

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaSearch, FaHeart, FaBars, FaTimes } from 'react-icons/fa';
 import { LuBaggageClaim } from "react-icons/lu";
 import { HiUserCircle } from "react-icons/hi";
@@ -26,11 +26,13 @@ import BackendURL from '../config/backendURL';
 
 import axios from 'axios';
 
+
 const Header = () => {
   const cartProduct = useSelector(state => state.productCart.products);
   const user = useSelector(state => state.loginUser.user);
 
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   // console.log("Header-- : ", user);
 
@@ -162,7 +164,7 @@ const Header = () => {
                   <ul>
                     <li className='dropdown-li' onClick={() => setIsLoginOpen(true)}> <FaRegUserCircle /> <span>Login</span></li>
                     <li className='dropdown-li'><RiEditBoxLine /> <span>Profile</span></li>
-                    <li className='dropdown-li'><MdDriveFolderUpload /> <span>My Orders</span></li>
+                    <li className='dropdown-li' onClick={()=>{navigate("/myorders")}}><MdDriveFolderUpload /> <span>My Orders</span></li>
                     <li className='dropdown-li'
                       onClick={userLogout}
                     ><IoMdExit /><span>Logout</span></li>

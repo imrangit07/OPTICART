@@ -1,15 +1,19 @@
-const {catchAsyncErrors} = require("../middleware/catchAsynError");
+const OrderModel = require("../Models/OrdersModel")
+const { catchAsyncErrors } = require("../middleware/catchAsynError");
 
-const getOrders = catchAsyncErrors(async(req,res)=>{
+const getMyOrders = catchAsyncErrors(async (req, res) => {
+    const { customerId } = req.query;
+    const myorders = await OrderModel.find({ customerId: customerId })
+    .populate('customerId')
+    .populate('items.productId');
 
-    const customerId = req.cookies.userId;
-    console.log("custoemr",customerId);
+    console.log(myorders);
 
-    res.json("okkk");
-    
+    res.json(myorders);
+
 })
 
-module.exports=
+module.exports =
 {
-    getOrders
+    getMyOrders
 };
