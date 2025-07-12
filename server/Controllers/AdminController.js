@@ -27,14 +27,8 @@ const adminLogin = catchAsyncErrors(async (req, res) => {
   );
 
 
-  res.cookie("adminToken", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    maxAge: 24 * 60 * 60 * 1000,
-  });
 
-  res.status(200).json({ message: "Admin logged in successfully", adminData });
+  res.status(200).json({ message: "Admin logged in successfully", adminData:adminData.adminId });
 
 
 });

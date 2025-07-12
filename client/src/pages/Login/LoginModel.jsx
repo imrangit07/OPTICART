@@ -72,7 +72,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       }
 
     } catch (error) {
-       toast.error("User Login Successfully!", {transition:Zoom, style: { fontSize: '16px', } });
+       toast.error(error.response.data.message, {transition:Zoom, style: { fontSize: '16px', } });
       
       // alert(error);
 
@@ -84,7 +84,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}><MdCancel /></button>
 
         {isRegister ? (

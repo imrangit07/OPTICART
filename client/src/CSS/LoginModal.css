@@ -13,11 +13,11 @@
 }
 
 
-.modal-content {
+.login-modal-content {
   background: #fff;
   padding: 40px;
   border-radius: 8px;
-  width: 90%;
+  /* width: 20%; */
   max-width: 400px;
   position: relative;
   animation: slideDown 0.6s ease forwards;
@@ -46,7 +46,7 @@
 }
 
 
-.modal-content input {
+.login-modal-content input {
   width: 100%;
   padding: 12px 10px;
   margin: 10px 0;
@@ -56,7 +56,7 @@
 }
 
 
-.modal-content button[type="submit"] {
+.login-modal-content button[type="submit"] {
   width: 100%;
   padding: 12px;
   background: #ff7e00;

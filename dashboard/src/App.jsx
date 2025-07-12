@@ -7,6 +7,10 @@ import ProductList from './components/ProductList';
 import AddProduct from './components/AddProduct';
 import EditProduct from './components/EditProduct';
 import AllOrders from './components/AllOrders';
+import Customers from './components/Customers';
+import ProtectedRoute from './components/ProtectedRoute';
+const admin = localStorage.getItem("admin");
+
 
 function App() {
   return (
@@ -16,11 +20,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path="admin/login" element={<AdminLogin />} />
 
+        <Route element={<ProtectedRoute />}>
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<ProductList />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="edit/:id" element={<EditProduct />} />
             <Route path="orders" element={<AllOrders />} />
+            <Route path="customers" element={<Customers />} />
+          </Route>
           </Route>
         </Route>
       </Routes>

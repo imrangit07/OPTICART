@@ -24,12 +24,12 @@ function Sidebar() {
             <span>Dashboard</span>
           </Link>
         </li>
-        <li className={location.pathname === '/dashboard/products' ? 'active' : ''}>
+        {/* <li className={location.pathname === '/dashboard/products' ? 'active' : ''}>
           <Link to="/dashboard/products">
             <FiShoppingBag className="icon" />
             <span>Products</span>
           </Link>
-        </li>
+        </li> */}
         <li className={location.pathname === '/dashboard/add' ? 'active' : ''}>
           <Link to="/dashboard/add">
             <FiPlusSquare className="icon" />
@@ -52,13 +52,13 @@ function Sidebar() {
       <div className="sidebar-footer">
         <ul className="sidebar-menu">
           <li>
-            <Link to="/dashboard/settings">
+            <Link to="/dashboard">
               <FiSettings className="icon" />
               <span>Settings</span>
             </Link>
           </li>
-          <li>
-            <Link to="/logout">
+          <li  >
+            <Link  onClick={()=>{localStorage.removeItem("admin")}} to="/">
               <FiLogOut className="icon" />
               <span>Logout</span>
             </Link>

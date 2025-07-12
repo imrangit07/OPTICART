@@ -3,6 +3,8 @@ import '../styles/addProduct.css';
 import BackendURL from '../config/backendURL';
 import axios from 'axios';
 import { FiUpload, FiX, FiArrowLeft } from 'react-icons/fi';
+import { Zoom, toast } from "react-toastify";
+
 
 function AddProduct({ addProduct, setActiveView }) {
   const [product, setProduct] = useState({
@@ -66,9 +68,9 @@ function AddProduct({ addProduct, setActiveView }) {
       });
 
       const res = await axios.post(`${BackendURL}/admin/addproduct`, formData);
-      console.log(res.data);
-      alert("Product added successfully");
-      // Reset form
+   
+      toast.success("Product added successfully", { transition: Zoom, style: { fontSize: '16px', } });
+
       setProduct({
         name: '',
         description: '',
@@ -81,8 +83,7 @@ function AddProduct({ addProduct, setActiveView }) {
       setSelectedImages([]);
       setPreviewImages([]);
     } catch (error) {
-      console.error(error);
-      alert("Error adding product");
+      toast.error("Error adding product", { transition: Zoom, style: { fontSize: '16px', } });
     } finally {
       setIsUploading(false);
     }

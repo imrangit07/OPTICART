@@ -11,7 +11,7 @@ import { IoMdExit } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import '../CSS/Header.css';
 
-import {Zoom, toast } from 'react-toastify';
+import { Zoom, toast } from 'react-toastify';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ const Header = () => {
   const user = useSelector(state => state.loginUser.user);
 
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   // console.log("Header-- : ", user);
 
@@ -61,13 +61,14 @@ const Header = () => {
 
       dispatch(removeUser());
 
-       toast.success(res.data.message, {transition:Zoom, style: { fontSize: '16px', } });
+      toast.success(res.data.message, { transition: Zoom, style: { fontSize: '16px', } });
       // alert(res.data.message);
       currentUser();
+      navigate("/")
 
     } catch (error) {
-       toast.error(error, {transition:Zoom, style: { fontSize: '16px', } });
-      
+      toast.error(error, { transition: Zoom, style: { fontSize: '16px', } });
+
       // alert(error);
     }
   }
@@ -148,14 +149,14 @@ const Header = () => {
                 className='head-icon header-heart'
               />
               <div className='icons-text'>
-              {user ?
-                <>
-                  <span className='user-name'>{user.userName}</span>
-                </>
-                :
-                "Login"
-              }
-              <FaAngleDown id='drop-icon' />
+                {user ?
+                  <>
+                    <span className='user-name'>{user.userName}</span>
+                  </>
+                  :
+                  "Login"
+                }
+                <FaAngleDown id='drop-icon' />
               </div>
 
               {/* DROPDOWN MENU */}
@@ -164,7 +165,7 @@ const Header = () => {
                   <ul>
                     <li className='dropdown-li' onClick={() => setIsLoginOpen(true)}> <FaRegUserCircle /> <span>Login</span></li>
                     <li className='dropdown-li'><RiEditBoxLine /> <span>Profile</span></li>
-                    <li className='dropdown-li' onClick={()=>{navigate("/myorders")}}><MdDriveFolderUpload /> <span>My Orders</span></li>
+                    <li className='dropdown-li' onClick={() => { navigate("/myorders") }}><MdDriveFolderUpload /> <span>My Orders</span></li>
                     <li className='dropdown-li'
                       onClick={userLogout}
                     ><IoMdExit /><span>Logout</span></li>

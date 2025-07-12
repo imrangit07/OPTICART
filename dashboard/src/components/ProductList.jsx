@@ -4,6 +4,8 @@ import axios from 'axios';
 import BackendURL from '../config/backendURL';
 import { FiEdit2, FiTrash2, FiPlus, FiLoader } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import { Zoom, toast } from "react-toastify";
+
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -32,6 +34,7 @@ function ProductList() {
   }, []);
 
   const handleDeleteClick = (id) => {
+
     setProductToDelete(id);
     setDeleteModalOpen(true);
   };
@@ -40,11 +43,13 @@ function ProductList() {
     try {
       await axios.get(`${BackendURL}/admin/delete/?id=${productToDelete}`);
       loadProducts();
+      toast.success("Product deleted successfully!", { transition: Zoom, style: { fontSize: '16px', } });
       setDeleteModalOpen(false);
+
     } catch (error) {
-      console.error('Error deleting product:', error);
-      alert('Failed to delete product. Please try again.');
+
       setDeleteModalOpen(false);
+      toast.error("Failed to delete product. Please try again.", { transition: Zoom, style: { fontSize: '16px', } });
     }
   };
 
@@ -63,7 +68,7 @@ function ProductList() {
 
   const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, productName }) => {
     if (!isOpen) return null;
-  
+
     return (
       <div className="modal-overlay">
         <div className="modal-container">
@@ -134,9 +139,9 @@ function ProductList() {
                   <td>
                     <div className="product-image">
                       {product.images && product.images.length > 0 ? (
-                        <img 
-                          src={product.images[0].url} 
-                          alt={product.name} 
+                        <img
+                          src={product.images[0].url}
+                          alt={product.name}
                         />
                       ) : (
                         <div className="no-image">No Image</div>
@@ -151,15 +156,15 @@ function ProductList() {
                   </td>
                   <td>
                     <div className="action-buttons">
-                      <button 
-                        onClick={() => handleEdit(product)} 
+                      <button
+                        onClick={() => handleEdit(product)}
                         className="edit-btn"
                         title="Edit"
                       >
                         <FiEdit2 />
                       </button>
-                      <button 
-                        onClick={() => handleDeleteClick(product._id)} 
+                      <button
+                        onClick={() => handleDeleteClick(product._id)}
                         className="delete-btn"
                         title="Delete"
                       >

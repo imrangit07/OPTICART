@@ -1,9 +1,9 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminLogin.css';
 import axios from 'axios';
-
+import { Zoom, toast } from "react-toastify"
 const AdminLogin = () => {
   const [adminId, setAdminId] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
@@ -17,17 +17,22 @@ const AdminLogin = () => {
       const res = await axios.post(
         'http://localhost:3000/admin/login',
         { adminId, adminPassword },
-        // { withCredentials: true }
       );
+      // console.log(res.data.adminData);
 
-      alert(res.data.message);
-      navigate("/dashboard")
+      localStorage.setItem("admin",res.data.adminData);
+      
+      toast.success(res.data.message, { transition: Zoom, style: { fontSize: '16px', } });
+
+      navigate("/dashboard");
+
     } catch (error) {
-      alert(error.response?.data?.message || 'Login failed');
+      toast.error(error.response?.data?.message || 'Login failed',
+        { transition: Zoom, style: { fontSize: '16px', } });
     }
   };
 
-  
+
 
   return (
     <div className="admin-login-container">
