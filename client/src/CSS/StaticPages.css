@@ -1,0 +1,17 @@
+/* StaticPage.css */
+.static-page-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.static-page-wrapper h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.static-page-wrapper p {
+  font-size: 1.2rem;
+  color: #555;
+}

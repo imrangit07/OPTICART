@@ -29,6 +29,7 @@ import axios from 'axios';
 
 const Header = () => {
   const cartProduct = useSelector(state => state.productCart.products);
+  const wishListProduct = useSelector(state => state.productCart.wishList);
   const user = useSelector(state => state.loginUser.user);
 
   const dispatch = useDispatch();
@@ -85,13 +86,20 @@ const Header = () => {
     <>
 
       <nav className="navbar">
-        <div className='main-logo'>
-          <span className='logo-text'><img src={mainLogo} alt="Logo" className='logo-img' />PtiCart</span>
-        </div>
+        <NavLink
+          to="/home"
+          // className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
+          style={{textDecoration:"none"}}
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div className='main-logo'>
+            <span className='logo-text'><img src={mainLogo} alt="Logo" className='logo-img' />PtiCart</span>
+          </div>
+        </NavLink>
 
         <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
           <NavLink
-            to="/"
+            to="/home"
             className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}
             onClick={() => setIsMobileMenuOpen(false)}
           >
@@ -176,14 +184,16 @@ const Header = () => {
 
           </div>
 
-          <div className='icons'>
-            <div className='user-icons'>
-              <span className='cart-count'>0</span>
+          <NavLink to="/wishlist" className="all-nav-link">
+            <div className='icons'>
+              <div className='user-icons'>
+                <span className='cart-count'>{wishListProduct ? wishListProduct.length : 0}</span>
 
-              <IoHeartOutline className='head-icon header-heart' />
-              <span className='icons-text'>Wishlist</span>
+                <IoHeartOutline className='head-icon header-heart' />
+                <span className='icons-text'>Wishlist</span>
+              </div>
             </div>
-          </div>
+          </NavLink>
           <NavLink to="/cart" className="all-nav-link">
             <div className='icons'>
               <div className='user-icons'>

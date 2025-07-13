@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import BackendURL from '../../config/backendURL';
 import { useDispatch } from 'react-redux';
-import { addToProduct } from "../../slice/cartSlice";
+import { addToProduct,addToWishList } from "../../slice/cartSlice";
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
@@ -45,7 +45,20 @@ const FeaturedProducts = () => {
               {/* })} */}
               <div className="hover-icons">
                 <FaSearch title="Quick View" />
-                <FaHeart title="Add to Wishlist" />
+
+                {/* This is for add To WishList */}
+                <FaHeart title="Add to Wishlist"
+                onClick={() => { dispatch(addToWishList({
+                    id:product._id,
+                    name:product.name,
+                    price:product.price,
+                    description:product.description,
+                    stock:product.stock_quantity,
+                    images:product.images,
+                    quantity: 1}))}}
+                />
+
+                {/* This is for add To cart */}
                 <LuBaggageClaim
                   title="Add to Cart"
                   onClick={() => { dispatch(addToProduct({

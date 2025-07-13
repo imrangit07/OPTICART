@@ -1,6 +1,10 @@
 import React from 'react';
 import '../CSS/Footer.css'; 
 import mainLogo from '../../public/main-logo/Logo.webp'; 
+import { FaFacebookF,FaInstagram } from "react-icons/fa";
+// import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { AiOutlineYoutube } from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -40,10 +44,10 @@ const Footer = () => {
         <div className="footer-section social">
           <h4>Follow Us</h4>
           <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-youtube"></i></a>
+            <a href="#"><FaFacebookF style={{color:"#111"}}/></a>
+            <a href="#"><FaInstagram style={{color:"#111"}}/></a>
+            <a href="#"><FaXTwitter style={{color:"#111"}}/></a>
+            <a href="#"><AiOutlineYoutube style={{color:"#111"}}/></a>
           </div>
         </div>
 

@@ -90,7 +90,8 @@
 
 .order-products {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;

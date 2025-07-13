@@ -198,7 +198,7 @@
 .continue-shopping a:hover {
     text-decoration: underline;
 }
-/* Empty Cart Styles */
+
 .empty-cart {
     display: flex;
     justify-content: center;
@@ -270,6 +270,8 @@
     
     .cart-item {
         flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
     }
     
     .cart-item-details {
@@ -280,4 +282,16 @@
     .cart-item-quantity {
         margin-right: 20px;
     }
+    .cart-item{
+        flex-direction: column;
+    }
+.cart-item-price{
+   display: none;
+}
+.remove-btn{
+    background-color: #ff7b00;
+    width: 100%;
+    color:#fff;
+    margin-top: 20px;
+}
 }
