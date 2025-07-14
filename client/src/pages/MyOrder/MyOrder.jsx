@@ -8,21 +8,28 @@ import BackendURL from '../../config/backendURL';
 
 const MyOrder = () => {
 
-    const currentUser = useSelector((state) => state.loginUser.user);
-    const customerId = currentUser?.id;
+  const currentUser = useSelector((state) => state.loginUser.user);
+  const customerId = currentUser?.id;
 
   const [orders, setOrders] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
- 
+
+  //This is for filter (status)
+  const [selectedStatus, setSelectedStatus] = useState(null);
+
+  const handleStatusChange = (status) => {
+    setSelectedStatus(selectedStatus === status ? null : status);
+  };
+
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const res = await axios.get(`${BackendURL}/product/myorders/?customerId=${customerId}`);
-    
+
         setOrders(res.data);
         console.log(res.data);
-        
+
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -31,8 +38,9 @@ const MyOrder = () => {
     fetchOrders();
   }, []);
 
-const filteredOrders = Array.isArray(orders)
-  ? orders
+  const filteredOrders = Array.isArray(orders)
+    ? orders
+      .filter(order => !selectedStatus || order.orderStatus === selectedStatus)
       .map(order => ({
         ...order,
         items: order.items.filter(item =>
@@ -40,37 +48,32 @@ const filteredOrders = Array.isArray(orders)
         )
       }))
       .filter(order => order.items.length > 0)
-  : [];
+    : [];
 
 
   console.log(filteredOrders);
-  
+
 
   return (
     <div className="page-container">
-      
+
       <div className="filter-section">
         <h1>Filters</h1>
         <div className="filter-box">
           <div className="order-status-filter">
             <h3>ORDER STATUS</h3>
             <form>
-              <label>
-                <input type="checkbox" name="ontheway" />
-                <span className="filter-text">On the way</span>
-              </label>
-              <label>
-                <input type="checkbox" name="delivered" />
-                <span className="filter-text">Delivered</span>
-              </label>
-              <label>
-                <input type="checkbox" name="cancelled" />
-                <span className="filter-text">Cancelled</span>
-              </label>
-              <label>
-                <input type="checkbox" name="returned" />
-                <span className="filter-text">Returned</span>
-              </label>
+              {['Pending', 'Processing', 'Packed', 'Out for Delivery', 'Completed', 'Cancelled'].map(status => (
+                <label key={status}>
+                  <input
+                    type="radio"
+                    name="orderStatus"
+                    checked={selectedStatus === status}
+                    onChange={() => handleStatusChange(status)}
+                  />
+                  <span className="filter-text">{status}</span>
+                </label>
+              ))}
             </form>
           </div>
 
@@ -110,9 +113,9 @@ const filteredOrders = Array.isArray(orders)
         </div>
       </div>
 
-   
+
       <div className="order-section">
-     
+
         <div className="order-search">
           <input
             type="text"
@@ -123,7 +126,7 @@ const filteredOrders = Array.isArray(orders)
           <span>Search Orders</span>
         </div>
 
-       
+
         {filteredOrders.length === 0 ? (
           <p>No orders found.</p>
         ) : (
@@ -147,7 +150,7 @@ const filteredOrders = Array.isArray(orders)
                 </div>
 
                 <div className="order-status">
-                  <span>Status: {order.orderStatus}</span>
+                  <span data-status={order.orderStatus}>Status: {order.orderStatus}</span>
                   {/* <span>Payment: {order.paymentStatus}</span> */}
                   <span>Order Date: {new Date(order.orderDate).toLocaleDateString()}</span>
                 </div>

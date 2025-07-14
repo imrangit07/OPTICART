@@ -11,5 +11,12 @@ Router.get("/myorders",OrderRoute.getMyOrders);
 //This is for Adim
 Router.get("/allorders",OrderRoute.getAllOrders);
 
+Router.get("/view",OrderRoute.getOneOrder);
+Router.put("/updateStatus",OrderRoute.updateOrderStatus);
+
+
+
+
+
 
 module.exports= Router;

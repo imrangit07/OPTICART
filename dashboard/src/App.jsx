@@ -9,6 +9,7 @@ import EditProduct from './components/EditProduct';
 import AllOrders from './components/AllOrders';
 import Customers from './components/Customers';
 import ProtectedRoute from './components/ProtectedRoute';
+import Update from './components/Update';
 const admin = localStorage.getItem("admin");
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="edit/:id" element={<EditProduct />} />
             <Route path="orders" element={<AllOrders />} />
             <Route path="customers" element={<Customers />} />
+            <Route path="update/:id" element={<Update />} />
           </Route>
           </Route>
         </Route>

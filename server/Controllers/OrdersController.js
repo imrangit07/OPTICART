@@ -20,12 +20,33 @@ const getAllOrders = catchAsyncErrors(async (req, res) => {
         .populate('customerId')
         .populate('items.productId');
 
-        res.json(allOrders)
+    res.json(allOrders)
 
 });
+
+const getOneOrder = catchAsyncErrors(async (req, res) => {
+    const order = await OrderModel.findById({ _id: req.query.id }).populate('customerId').populate('items.productId');
+    console.log(order);
+    res.json(order);
+
+})
+
+const updateOrderStatus = catchAsyncErrors(async (req, res) => {
+    console.log(req.body.orderStatus);
+    
+    const updateOrder = await OrderModel.findByIdAndUpdate(req.query.id, { orderStatus: req.body.orderStatus });
+    console.log(updateOrder);
+    res.json({
+        message:"success",
+        updateOrder:updateOrder
+    })
+    
+})
 
 module.exports =
 {
     getMyOrders,
-    getAllOrders
+    getAllOrders,
+    getOneOrder,
+    updateOrderStatus
 };

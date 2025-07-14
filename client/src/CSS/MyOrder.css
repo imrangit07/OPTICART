@@ -46,6 +46,11 @@
     font-weight: 400;
 }
 
+.filter-section input[type="radio"] {
+  accent-color: #ff7e00;
+  width: 18px;
+  height: 18px;
+}
 .filter-section input[type="checkbox"] {
   accent-color: #ff7e00;
   width: 18px;
@@ -155,6 +160,66 @@
   margin-right: 1.5rem;
 }
 
+
+
+/* Add this to your CSS file */
+.order-status {
+  display: flex;
+  gap: 15px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.order-status span {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Status-specific background colors */
+.order-status span:first-child {
+  background-color: var(--status-bg, #e0e0e0);
+  color: var(--status-color, #333);
+}
+
+.order-status span:first-child[data-status="Pending"] {
+  --status-bg: #fff3cd;
+  --status-color: #856404;
+}
+
+.order-status span:first-child[data-status="Processing"] {
+  --status-bg: #cce5ff;
+  --status-color: #004085;
+}
+
+.order-status span:first-child[data-status="Packed"] {
+  --status-bg: #d4edda;
+  --status-color: #155724;
+}
+
+.order-status span:first-child[data-status="Out for Delivery"] {
+  --status-bg: #e2e3e5;
+  --status-color: #383d41;
+}
+
+.order-status span:first-child[data-status="Completed"] {
+  --status-bg: #d4edda;
+  --status-color: #155724;
+}
+
+.order-status span:first-child[data-status="Cancelled"] {
+  --status-bg: #f8d7da;
+  --status-color: #721c24;
+}
+
+.order-status span:not(:first-child) {
+  background-color: #f0f2f5;
+  color: #555;
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .page-container {
@@ -191,4 +256,3 @@
     flex-direction: row-reverse;
   }
 }
-/*  */

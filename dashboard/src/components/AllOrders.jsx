@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/AllOrders.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const navigate = useNavigate();
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -32,21 +34,7 @@ const AllOrders = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="error-container">
-        <p className="error-message">Error: {error}</p>
-        <button 
-          className="retry-btn"
-          onClick={() => window.location.reload()}
-        >
-          Retry
-        </button>
-      </div>
-    );
-  }
-
-  // Calculate totals for the summary cards
+ 
   const totalOrders = orders.length;
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0);
   const pendingOrders = orders.filter(order => order.orderStatus === 'Pending').length;
@@ -54,8 +42,7 @@ const AllOrders = () => {
   return (
     <div className="orders-container">
       <h1 className="orders-header">Order Management</h1>
-      
-      {/* Summary Cards */}
+
       <div className="summary-cards">
         <div className="summary-card">
           <h3>Total Orders</h3>
@@ -71,7 +58,7 @@ const AllOrders = () => {
         </div>
       </div>
 
-      {/* Orders Table */}
+   
       <div className="orders-table-container">
         <table className="orders-table">
           <thead>
@@ -122,7 +109,9 @@ const AllOrders = () => {
                   </span>
                 </td> */}
                 <td>
-                  <button className="action-btn view-btn">View</button>
+                  <button className="action-btn view-btn"
+                  onClick={()=>{navigate(`/dashboard/update/${order._id}`)}}
+                  >View</button>
                   {/* <button className="action-btn edit-btn">Update</button> */}
                 </td>
               </tr>

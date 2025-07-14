@@ -81,7 +81,7 @@ router.post("/orders", async (req, res) => {
                 items,
                 totalAmount: price,
                 shippingAddress,
-                paymentStatus: 'Pending',
+                paymentStatus: 'Success',
                 orderStatus: 'Pending',
                 deliveryDate: deliveryDate,
                 razorpay_order_id: orderData.id
