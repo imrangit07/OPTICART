@@ -3,12 +3,15 @@ import axios from 'axios';
 import '../styles/AllOrders.css';
 import { useNavigate } from 'react-router-dom';
 
-
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1); // NEW
+  const ordersPerPage = 5; // NEW
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -34,10 +37,19 @@ const navigate = useNavigate();
     );
   }
 
- 
+  // NEW: Pagination calculations
   const totalOrders = orders.length;
+  const totalPages = Math.ceil(totalOrders / ordersPerPage); // NEW
+  const indexOfLastOrder = currentPage * ordersPerPage; // NEW
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage; // NEW
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder); // NEW
+
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0);
   const pendingOrders = orders.filter(order => order.orderStatus === 'Pending').length;
+
+  const goToPage = (pageNumber) => setCurrentPage(pageNumber); // NEW
+  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1); // NEW
+  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1); // NEW
 
   return (
     <div className="orders-container">
@@ -58,7 +70,6 @@ const navigate = useNavigate();
         </div>
       </div>
 
-   
       <div className="orders-table-container">
         <table className="orders-table">
           <thead>
@@ -69,12 +80,11 @@ const navigate = useNavigate();
               <th>Items</th>
               <th>Amount</th>
               <th>Status</th>
-              {/* <th>Payment</th> */}
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {currentOrders.map((order) => ( // MODIFIED
               <tr key={order._id}>
                 <td className="order-id">{order._id.slice(-6)}</td>
                 <td>
@@ -103,21 +113,37 @@ const navigate = useNavigate();
                     {order.orderStatus}
                   </span>
                 </td>
-                {/* <td>
-                  <span className={`payment-status ${order.paymentStatus.toLowerCase()}`}>
-                    {order.paymentStatus}
-                  </span>
-                </td> */}
                 <td>
-                  <button className="action-btn view-btn"
-                  onClick={()=>{navigate(`/dashboard/update/${order._id}`)}}
-                  >View</button>
-                  {/* <button className="action-btn edit-btn">Update</button> */}
+                  <button
+                    className="action-btn view-btn"
+                    onClick={() => navigate(`/dashboard/update/${order._id}`)}
+                  >
+                    View
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* NEW: Pagination Controls */}
+      <div className="pagination">
+        <button onClick={prevPage} disabled={currentPage === 1} className="pagination-btn">
+          Previous
+        </button>
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToPage(index + 1)}
+            className={`pagination-btn ${currentPage === index + 1 ? 'active' : ''}`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={nextPage} disabled={currentPage === totalPages} className="pagination-btn">
+          Next
+        </button>
       </div>
     </div>
   );

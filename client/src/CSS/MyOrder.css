@@ -42,8 +42,9 @@
   user-select: none;
   font-size: 0.95rem;
 }
-.filter-text{
-    font-weight: 400;
+
+.filter-text {
+  font-weight: 400;
 }
 
 .filter-section input[type="radio"] {
@@ -51,11 +52,13 @@
   width: 18px;
   height: 18px;
 }
+
 .filter-section input[type="checkbox"] {
   accent-color: #ff7e00;
   width: 18px;
   height: 18px;
 }
+
 .order-section {
   flex: 1;
   display: flex;
@@ -76,7 +79,7 @@
   border-radius: 8px;
   font-size: 1rem;
   box-sizing: border-box;
-  
+
 }
 
 .order-search span {
@@ -100,7 +103,7 @@
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   gap: 2rem;
   flex-wrap: wrap;
 }
@@ -220,6 +223,40 @@
   color: #555;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+}
+
+.pagination-btn:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination-btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+  color: #999;
+}
+
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .page-container {
@@ -248,7 +285,8 @@
   .order-search span {
     text-align: center;
   }
-  .filter-box{
+
+  .filter-box {
     display: flex;
     align-items: start;
     justify-content: start;
