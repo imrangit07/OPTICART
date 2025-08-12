@@ -7,8 +7,8 @@ const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // NEW
-  const ordersPerPage = 5; // NEW
+  const [currentPage, setCurrentPage] = useState(1); 
+  const ordersPerPage = 5; 
 
   const navigate = useNavigate();
 
@@ -37,19 +37,19 @@ const AllOrders = () => {
     );
   }
 
-  // NEW: Pagination calculations
+  // Pagination calculations
   const totalOrders = orders.length;
-  const totalPages = Math.ceil(totalOrders / ordersPerPage); // NEW
-  const indexOfLastOrder = currentPage * ordersPerPage; // NEW
-  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage; // NEW
-  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder); // NEW
+  const totalPages = Math.ceil(totalOrders / ordersPerPage);
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
 
   const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0);
   const pendingOrders = orders.filter(order => order.orderStatus === 'Pending').length;
 
-  const goToPage = (pageNumber) => setCurrentPage(pageNumber); // NEW
-  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1); // NEW
-  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1); // NEW
+  const goToPage = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1);
+  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1);
 
   return (
     <div className="orders-container">
@@ -84,7 +84,7 @@ const AllOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {currentOrders.map((order) => ( // MODIFIED
+            {currentOrders.map((order) => (
               <tr key={order._id}>
                 <td className="order-id">{order._id.slice(-6)}</td>
                 <td>
@@ -127,7 +127,7 @@ const AllOrders = () => {
         </table>
       </div>
 
-      {/* NEW: Pagination Controls */}
+      {/* Pagination Controls */}
       <div className="pagination">
         <button onClick={prevPage} disabled={currentPage === 1} className="pagination-btn">
           Previous

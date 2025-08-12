@@ -28,7 +28,7 @@ function AddProduct({ addProduct, setActiveView }) {
   const handleImages = (e) => {
     const files = Array.from(e.target.files);
     setSelectedImages(files);
-    
+
     // Create preview URLs
     const previews = files.map(file => URL.createObjectURL(file));
     setPreviewImages(previews);
@@ -38,7 +38,7 @@ function AddProduct({ addProduct, setActiveView }) {
     const newImages = [...selectedImages];
     newImages.splice(index, 1);
     setSelectedImages(newImages);
-    
+
     const newPreviews = [...previewImages];
     URL.revokeObjectURL(newPreviews[index]);
     newPreviews.splice(index, 1);
@@ -68,7 +68,7 @@ function AddProduct({ addProduct, setActiveView }) {
       });
 
       const res = await axios.post(`${BackendURL}/admin/addproduct`, formData);
-   
+
       toast.success("Product added successfully", { transition: Zoom, style: { fontSize: '16px', } });
 
       setProduct({
@@ -97,7 +97,7 @@ function AddProduct({ addProduct, setActiveView }) {
         </button>
         <h2>Add New Product</h2>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="product-form">
         <div className="form-grid">
           <div className="form-group">
@@ -111,7 +111,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="Enter product name"
             />
           </div>
-          
+
           <div className="form-group">
             <label>SKU (Unique Code) *</label>
             <input
@@ -123,7 +123,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="Enter product SKU"
             />
           </div>
-          
+
           <div className="form-group">
             <label>Price *</label>
             <input
@@ -136,7 +136,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="0.00"
             />
           </div>
-          
+
           <div className="form-group">
             <label>Quantity *</label>
             <input
@@ -148,7 +148,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="Enter quantity"
             />
           </div>
-          
+
           <div className="form-group">
             <label>Category *</label>
             <input
@@ -160,7 +160,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="Enter category"
             />
           </div>
-          
+
           <div className="form-group">
             <label>Color *</label>
             <input
@@ -172,7 +172,7 @@ function AddProduct({ addProduct, setActiveView }) {
               placeholder="Enter color"
             />
           </div>
-          
+
           <div className="form-group full-width">
             <label>Description *</label>
             <textarea
@@ -184,7 +184,7 @@ function AddProduct({ addProduct, setActiveView }) {
               rows="4"
             ></textarea>
           </div>
-          
+
           <div className="form-group full-width">
             <label>Product Images *</label>
             <div className="image-upload-container">
@@ -201,14 +201,14 @@ function AddProduct({ addProduct, setActiveView }) {
                   accept="image/*"
                 />
               </label>
-              
+
               {previewImages.length > 0 && (
                 <div className="image-previews">
                   {previewImages.map((preview, index) => (
                     <div key={index} className="image-preview">
                       <img src={preview} alt={`Preview ${index}`} />
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => removeImage(index)}
                         className="remove-image"
                       >
@@ -221,17 +221,17 @@ function AddProduct({ addProduct, setActiveView }) {
             </div>
           </div>
         </div>
-        
+
         <div className="form-actions">
-          <button 
-            type="button" 
-            onClick={() => setActiveView('products')} 
+          <button
+            type="button"
+            onClick={() => setActiveView('products')}
             className="cancel-button"
           >
             Cancel
           </button>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={isUploading}
             className="submit-button"
           >

@@ -12,12 +12,12 @@ const MyOrder = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState(null);
   
-  const [currentPage, setCurrentPage] = useState(1); // NEW
-  const ordersPerPage = 3; // NEW
+  const [currentPage, setCurrentPage] = useState(1); 
+  const ordersPerPage = 3; 
 
   const handleStatusChange = (status) => {
     setSelectedStatus(selectedStatus === status ? null : status);
-    setCurrentPage(1); // NEW: Reset page on filter change
+    setCurrentPage(1); 
   };
 
   useEffect(() => {
@@ -45,15 +45,15 @@ const MyOrder = () => {
         .filter(order => order.items.length > 0)
     : [];
 
-  // NEW: Pagination logic
-  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage); // NEW
-  const indexOfLast = currentPage * ordersPerPage; // NEW
-  const indexOfFirst = indexOfLast - ordersPerPage; // NEW
-  const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast); // NEW
 
-  const goToPage = (pageNum) => setCurrentPage(pageNum); // NEW
-  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1); // NEW
-  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1); // NEW
+  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage); 
+  const indexOfLast = currentPage * ordersPerPage; 
+  const indexOfFirst = indexOfLast - ordersPerPage; 
+  const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast); 
+
+  const goToPage = (pageNum) => setCurrentPage(pageNum); 
+  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1); 
+  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1); 
 
   return (
     <div className="page-container">
@@ -100,13 +100,13 @@ const MyOrder = () => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); // NEW: Reset page on search
+              setCurrentPage(1); 
             }}
           />
           <span>Search Orders</span>
         </div>
 
-        {currentOrders.length === 0 ? ( // MODIFIED
+        {currentOrders.length === 0 ? ( 
           <p>No orders found.</p>
         ) : (
           currentOrders.map(order =>
@@ -137,7 +137,7 @@ const MyOrder = () => {
           )
         )}
 
-        {/* NEW: Pagination Controls */}
+        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="pagination">
             <button
