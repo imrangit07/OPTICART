@@ -28,14 +28,14 @@ const adminLogin = catchAsyncErrors(async (req, res) => {
 
 
 
-  res.status(200).json({ message: "Admin logged in successfully", adminData:adminData.adminId });
+  res.status(200).json({ message: "Admin logged in successfully", adminData: adminData.adminId });
 
 
 });
 
 //This is for Add New Product data
 const AddNewProducts = catchAsyncErrors(async (req, res) => {
-   
+
   const {
     name,
     description,
@@ -143,16 +143,43 @@ const editProduct = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Product and its images deleted successfully',
-    productData,
+    product: productData,
   });
 
 })
 
+
+//This is for Updating Product
+
+const updateProduct = catchAsyncErrors(async (req, res) => {
+  const { id } = req.query;
+  console.log(req.body, id);
+
+  const { name, price, categories, stock_quantity } = req.body;
+
+  const productData = await productModel.findByIdAndUpdate(id, {
+    name, price, categories, stock_quantity
+  })
+
+  if (!productData) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product not found'
+    });
+  }
+  res.status(200).json({
+    success: true,
+    message: 'Product Updated successfully',
+    product: productData,
+  });
+
+})
 
 module.exports = {
   adminLogin,
   AddNewProducts,
   getAllProducts,
   deleteProduct,
-  editProduct
+  editProduct,
+  updateProduct
 };

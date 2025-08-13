@@ -45,7 +45,7 @@ function Sidebar() {
         <li className={location.pathname === '/dashboard/customers' ? 'active' : ''}>
           <Link to="/dashboard/customers">
             <FiUsers className="icon" />
-            <span>Customers</span>
+            <span>Team</span>
           </Link>
         </li>
       </ul>

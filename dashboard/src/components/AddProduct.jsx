@@ -48,7 +48,7 @@ function AddProduct({ addProduct, setActiveView }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedImages.length === 0) {
-      alert('Please select at least one image');
+      toast.error("Please select at least one image", { transition: Zoom, style: { fontSize: '16px', } });
       return;
     }
 

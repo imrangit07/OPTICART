@@ -41,10 +41,12 @@ const LoginModal = ({ isOpen, onClose }) => {
     try {
       const res = await axios.post(`${BackendURL}/user/register`, registerData);
       // console.log(res.data);
+       toast.success(error.response.data.message, {transition:Zoom,style: { fontSize: '16px' }});
+
       setIsRegister(false);
 
     } catch (error) {
-       toast.success(error.response.data.message, {transition:Zoom,style: { fontSize: '16px' }});
+       toast.error(error.response.data.message, {transition:Zoom,style: { fontSize: '16px' }});
       // alert();
 
     }

@@ -16,5 +16,7 @@ Router.post('/addproduct', uploadMultiple, uploadImage, AdminRoutes.AddNewProduc
 Router.get('/getAllProduct', AdminRoutes.getAllProducts);
 Router.get('/delete', AdminRoutes.deleteProduct);
 Router.get('/edit', AdminRoutes.editProduct);
+Router.get('/viewproduct', AdminRoutes.editProduct);
+Router.post('/updateproduct', AdminRoutes.updateProduct);
 
 module.exports = Router;

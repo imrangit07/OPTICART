@@ -59,7 +59,7 @@ function ProductList() {
   };
 
   const handleEdit = (product) => {
-    navigate(`/dashboard/edit/${product._id}`, { state: { product } });
+    navigate(`/dashboard/edit/${product._id}`);
   };
 
   const handleAddProduct = () => {
