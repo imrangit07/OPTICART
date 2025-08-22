@@ -15,7 +15,7 @@ const AllOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/product/allorders');
+        const response = await axios.get('https://opticart.onrender.com/product/allorders');
         setOrders(response.data);
         setLoading(false);
       } catch (err) {

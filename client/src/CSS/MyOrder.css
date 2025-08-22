@@ -202,6 +202,10 @@
   --status-bg: #d4edda;
   --status-color: #155724;
 }
+.order-status span:first-child[data-status="Paid"] {
+  --status-bg: #d4edda;
+  --status-color: #155724;
+}
 
 .order-status span:first-child[data-status="Out for Delivery"] {
   --status-bg: #e2e3e5;

@@ -15,7 +15,7 @@ const AdminLogin = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3000/admin/login',
+        'https://opticart.onrender.com/admin/login',
         { adminId, adminPassword },
       );
       // console.log(res.data.adminData);

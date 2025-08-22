@@ -11,13 +11,13 @@ const MyOrder = () => {
   const [orders, setOrders] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState(null);
-  
-  const [currentPage, setCurrentPage] = useState(1); 
-  const ordersPerPage = 3; 
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 3;
 
   const handleStatusChange = (status) => {
     setSelectedStatus(selectedStatus === status ? null : status);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -35,25 +35,26 @@ const MyOrder = () => {
 
   const filteredOrders = Array.isArray(orders)
     ? orders
-        .filter(order => !selectedStatus || order.orderStatus === selectedStatus)
-        .map(order => ({
-          ...order,
-          items: order.items.filter(item =>
-            item.productId.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        }))
-        .filter(order => order.items.length > 0)
+      .filter(order => !selectedStatus || order.orderStatus === selectedStatus)
+      .map(order => ({
+        ...order,
+        items: order.items.filter(item =>
+          item.productId.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      }))
+      .filter(order => order.items.length > 0)
+      .reverse()
     : [];
 
 
-  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage); 
-  const indexOfLast = currentPage * ordersPerPage; 
-  const indexOfFirst = indexOfLast - ordersPerPage; 
-  const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast); 
+  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+  const indexOfLast = currentPage * ordersPerPage;
+  const indexOfFirst = indexOfLast - ordersPerPage;
+  const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast);
 
-  const goToPage = (pageNum) => setCurrentPage(pageNum); 
-  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1); 
-  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1); 
+  const goToPage = (pageNum) => setCurrentPage(pageNum);
+  const nextPage = () => currentPage < totalPages && setCurrentPage(prev => prev + 1);
+  const prevPage = () => currentPage > 1 && setCurrentPage(prev => prev - 1);
 
   return (
     <div className="page-container">
@@ -100,13 +101,13 @@ const MyOrder = () => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); 
+              setCurrentPage(1);
             }}
           />
           <span>Search Orders</span>
         </div>
 
-        {currentOrders.length === 0 ? ( 
+        {currentOrders.length === 0 ? (
           <p>No orders found.</p>
         ) : (
           currentOrders.map(order =>
@@ -124,8 +125,11 @@ const MyOrder = () => {
                   <span className="order-description">{item.productId.description}</span>
                 </div>
 
-                <div className="order-price">
-                  ₹{item.price} × {item.quantity} = ₹{item.price * item.quantity}
+                <div className="order-price order-status">
+                  <span data-status={order.paymentStatus}>Payment: {order.paymentStatus}</span>
+
+                  <span>₹{item.price} × {item.quantity} = ₹{item.price * item.quantity}</span>
+                  
                 </div>
 
                 <div className="order-status">
