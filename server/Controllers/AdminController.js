@@ -9,7 +9,8 @@ const jwt = require("jsonwebtoken");
 const adminLogin = catchAsyncErrors(async (req, res) => {
   const { adminId, adminPassword } = req.body;
 
-  const adminData = await AdminModel.findOne({ adminId });
+  const adminData = await AdminModel.findOne({ adminId:adminId });
+  
 
   if (!adminData) {
     return res.status(404).json({ message: "Admin not found" });
@@ -52,7 +53,7 @@ const AddNewProducts = catchAsyncErrors(async (req, res) => {
   const images = (req.uploadedFiles || []).map(file => ({
     url: file.url,
     public_id: file.public_id,
-    is_primary: false // Or true if you have logic for that
+    is_primary: false 
   }));
 
 
@@ -86,7 +87,7 @@ const getAllProducts = catchAsyncErrors(async (req, res) => {
 
   const allProducts = await ProductModel.find();
 
-  console.log(allProducts);
+  // console.log(allProducts);
 
   res.status(200).json({
     success: true,
@@ -112,7 +113,7 @@ const deleteProduct = catchAsyncErrors(async (req, res) => {
   // Loop over images and delete from Cloudinary
   if (product.images && product.images.length > 0) {
     for (const image of product.images) {
-      console.log("check : ", image.public_id);
+      // console.log("check : ", image.public_id);
 
       // Public_id is importent for deleteing images from Cloudinary.store in database
       if (image.public_id) {
@@ -132,7 +133,7 @@ const deleteProduct = catchAsyncErrors(async (req, res) => {
 const editProduct = catchAsyncErrors(async (req, res) => {
   const { id } = req.query;
   const productData = await productModel.findOne({ _id: id })
-  console.log(productData);
+  // console.log(productData);
 
   if (!productData) {
     return res.status(404).json({
@@ -153,7 +154,7 @@ const editProduct = catchAsyncErrors(async (req, res) => {
 
 const updateProduct = catchAsyncErrors(async (req, res) => {
   const { id } = req.query;
-  console.log(req.body, id);
+  // console.log(req.body, id);
 
   const { name, price, categories, stock_quantity } = req.body;
 

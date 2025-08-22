@@ -47,6 +47,19 @@ function AddProduct({ addProduct, setActiveView }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation for price
+    if (Number(product.price) <= 0) {
+      toast.error("Price must be greater than 0", { transition: Zoom, style: { fontSize: '16px' } });
+      return;
+    }
+
+    // Validation for quantity
+    if (Number(product.stock_quantity) <= 0) {
+      toast.error("Quantity must be greater than 0", { transition: Zoom, style: { fontSize: '16px' } });
+      return;
+    }
+    // Validation for images
     if (selectedImages.length === 0) {
       toast.error("Please select at least one image", { transition: Zoom, style: { fontSize: '16px', } });
       return;

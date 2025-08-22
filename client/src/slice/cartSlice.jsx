@@ -35,6 +35,7 @@ const cartSlice = createSlice({
             )
             if (productIndex >= 0) {
                 state.products[productIndex].quantity += 1;
+                  console.log(state.products[productIndex].quantity);
             }
         },
 

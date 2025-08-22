@@ -40,7 +40,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
         { withCredentials: true }
       );
       console.log(res.data);
-      
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -62,6 +62,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
             name="phoneNumber"
             value={address.phoneNumber}
             onChange={handleChange}
+            required
           />
 
           <label>Street</label>
@@ -70,6 +71,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
             name="street"
             value={address.street}
             onChange={handleChange}
+            required
           />
 
           <div className="row">
@@ -80,6 +82,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
                 name="city"
                 value={address.city}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -90,6 +93,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
                 name="state"
                 value={address.state}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -102,6 +106,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
                 name="zipCode"
                 value={address.zipCode}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -111,6 +116,7 @@ const UserInfo = ({ isOpen, onClose, price }) => {
                 name="country"
                 value={address.country}
                 onChange={handleChange}
+                required
               >
                 <option value="">Select Country</option>
                 <option value="India">India</option>

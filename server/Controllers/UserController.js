@@ -77,7 +77,7 @@ const userInfo = catchAsyncErrors(async (req, res) => {
   const { customerId, phoneNumber, street, city, state, zipCode, country } = req.body;
   //  const  = req.cookies.userId;
 
-  console.log('only info ', customerId);
+  // console.log('only info ', customerId);
 
 
   const shippingAddress = {
@@ -110,7 +110,7 @@ const CurrentUserInfo = catchAsyncErrors(async (req, res) => {
 
   const UserInfo = await UserInfoModel.findOne({ customerId: customerId });
 
-  console.log("User Info get:", UserInfo);
+  // console.log("User Info get:", UserInfo);
  if (!UserInfo) {
   return res.status(404).json({
     success: false,
@@ -129,7 +129,7 @@ const CurrentUserInfo = catchAsyncErrors(async (req, res) => {
 
 // This is for add Shipping Address
 const placeOrder = catchAsyncErrors(async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { cartProduct, address, price,customerId} = req.body;
 
