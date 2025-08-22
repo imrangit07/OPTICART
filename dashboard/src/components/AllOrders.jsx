@@ -7,15 +7,15 @@ const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const ordersPerPage = 5; 
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 5;
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('https://opticart.onrender.com/product/allorders');
+        const response = await axios.get('http://localhost:3000/product/allorders');
         setOrders(response.data);
         setLoading(false);
       } catch (err) {
@@ -107,7 +107,15 @@ const AllOrders = () => {
                     ))}
                   </div>
                 </td>
-                <td>₹{order.totalAmount.toLocaleString()}</td>
+
+                <td>
+                  ₹{order.totalAmount.toLocaleString()}
+                  <span
+                    className={`status-badge ${order.paymentStatus === "Paid" ? "paid" : "pending"}`}
+                  >
+                    {order.paymentStatus}
+                  </span>
+                </td>
                 <td>
                   <span className={`status-badge ${order.orderStatus.toLowerCase()}`}>
                     {order.orderStatus}
@@ -117,6 +125,7 @@ const AllOrders = () => {
                   <button
                     className="action-btn view-btn"
                     onClick={() => navigate(`/dashboard/update/${order._id}`)}
+                    disabled={order.paymentStatus === "Pending"}
                   >
                     View
                   </button>

@@ -75,22 +75,22 @@ router.post("/orders", async (req, res) => {
             }
             //Saving OrderModel
 
-            const OurOrders = new OrderModel({
+            const OurOrders = await OrderModel.create({
                 customerId,
                 phoneNumber: address.phoneNumber,
                 items,
                 totalAmount: price,
                 shippingAddress,
-                paymentStatus: 'Success',
+                paymentStatus: 'Pending',
                 orderStatus: 'Pending',
                 deliveryDate: deliveryDate,
                 razorpay_order_id: orderData.id
             });
 
-            await OurOrders.save();
 
+            console.log("Check : ", OurOrders._id);
 
-            res.status(200).json({ data: orderData });
+            res.status(200).json({ data: orderData, orderId: OurOrders._id });
         });
 
     } catch (error) {
@@ -101,37 +101,37 @@ router.post("/orders", async (req, res) => {
 });
 
 //Verifying the payment
+
 router.post("/verify", async (req, res) => {
     try {
         const {
             razorpay_order_id,
             razorpay_payment_id,
-            razorpay_signature
+            razorpay_signature,
+            orderId
         } = req.body;
 
-        const sign = razorpay_order_id + "|" + razorpay_payment_id;
+
         const resultSign = crypto
-            .createHmac("sha256", process.env.KEY_SECRET)
-            .update(sign.toString())
+            .createHmac("sha256", process.env.RZP_KEY_SECRET)
+            .update(razorpay_order_id + "|" + razorpay_payment_id)
             .digest("hex");
 
-        if (razorpay_signature == resultSign) {
-
-            // Update order in DB: save payment_id, signature, mark as Paid
-            const order = await OrderModel.findOneAndUpdate(
-                { razorpay_order_id: razorpay_order_id },
+        if (razorpay_signature === resultSign) {
+            const order = await OrderModel.findByIdAndUpdate(
+                { _id: orderId },
                 {
-                    $set: {
-                        razorpay_payment_id: razorpay_order_id,
-                        razorpay_signature: razorpay_signature,
-                        paymentStatus: 'Paid'
-                    }
+                    razorpay_order_id,
+                    razorpay_payment_id,
+                    razorpay_signature,
+                    paymentStatus: "Paid",
                 },
                 { new: true }
             );
+
             return res.status(200).json({
                 message: "Payment verified successfully",
-                order: order
+                order
             });
         } else {
             return res.status(400).json({ message: "Invalid signature!" });

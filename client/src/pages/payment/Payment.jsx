@@ -41,30 +41,15 @@ const Payment = () => {
   const total = subtotal + shipping + cgst + sgst;
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await axios.post(
-  //       `${BackendURL}/user/placeorder`,
-  //       { cartProduct:products, address:address, price:total,customerId:customerId },
-  //       { withCredentials: true }
-  //     );
-  //     console.log(res.data);
-
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
 
   //---------------------------- Razorpay 
 
   const initPay = (data) => {
     const options = {
       key: "rzp_test_59lGJQaUUkcrsQ",
-      amount: total,
+      amount: data.amount,
       currency: data.currency,
-      name: products?.name || "MY Store",
+      name: products?.[0]?.name || "MY Store",
       description: "Test",
       image: firstProduct?.images[0]?.url,
       order_id: data.id,
@@ -75,14 +60,13 @@ const Payment = () => {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
+            orderId: data.orderId,
           });
         } catch (error) {
-          console.log(error);
+          console.log("Verify error:", error.response?.data || error.message);
         }
       },
-      theme: {
-        color: "#3399cc",
-      },
+      theme: { color: "#3399cc" },
     };
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
@@ -92,9 +76,14 @@ const Payment = () => {
   const handlePay = async () => {
     try {
       const orderURL = `${BackendURL}/api/payment/orders`;
-      const { data } = await axios.post(orderURL, { cartProduct: products, address: address, price: total, customerId: customerId });
-      console.log(data);
-      initPay(data.data);
+      const res = await axios.post(orderURL, { cartProduct: products, address: address, price: total, customerId: customerId });
+
+      console.log(res.data);
+
+      initPay({
+        ...res.data.data,
+        orderId: res.data.orderId
+      });
     } catch (error) {
       console.log(error);
     }
