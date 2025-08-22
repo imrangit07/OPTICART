@@ -12,7 +12,8 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
 
-const paymentRoute= require("./routes/payment");
+// const paymentRoute= require("./routes/payment");
+const paymentRoute= require("./Routes/Payment");
 
 require('dotenv').config();
 const cors = require("cors");
