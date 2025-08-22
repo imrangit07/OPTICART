@@ -10,7 +10,7 @@ const {isAuthenticated} = require("../middleware/Auth")
 Router.post("/current",isAuthenticated,UserRoutes.currentUser);
 Router.post("/register",UserRoutes.userRegister);
 Router.post("/login",UserRoutes.userLogin);
-Router.post("/logout",isAuthenticated,UserRoutes.userLogout);
+Router.post("/logout",UserRoutes.userLogout);
 Router.get('/getAllProduct', UserRoutes.getAllProducts);
 Router.post('/userinfo', UserRoutes.userInfo);
 
