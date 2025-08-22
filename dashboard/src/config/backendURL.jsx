@@ -1,3 +1,3 @@
-const BackendURL="http://localhost:3000";
+const BackendURL="https://opticart.onrender.com";
 
 export default BackendURL;

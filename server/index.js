@@ -29,12 +29,19 @@ const port =process.env.PORT;
 //Cookie
 app.use(cookieParser());
 
+const allowedOrigins = [
+  process.env.CLIENT_FRONTEND,
+  process.env.ADMIN_FRONTEND
+];
+
 app.use(
   cors({
-  origin: 'http://localhost:5173',   
-  credentials: true                  
-})
+    origin: allowedOrigins,
+    credentials: true,
+  })
 );
+
+
 
 //bodyparser
 app.use(bodyParser.json());
